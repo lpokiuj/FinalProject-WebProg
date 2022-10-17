@@ -18,22 +18,24 @@
             </div>
         </div>
         <div class="filling">
-            <div class="login">
-                <label for="email" class="email">E-mail</label>
-                <input type="text" id="email" name="email" placeholder="Enter your email">
-            </div>
-            <div class="login">
-                <label class="email">Password</label>
-                <input type="password" id="email" name="email" class="password" placeholder="Enter your password">
-            </div>
-            <div class="remember-me">
-                <input type="checkbox" id="remember-me" name="remember-me" value=true>
-                <label>Remember me</label>
-            </div>
-            <a href="#" class="login-button">
-                <label>Login</label>
-                <img src="/assets/login/Arrow Right.svg" alt="" srcset="">
-            </a>
+            <form action="">
+                <div class="login">
+                    <label for="email" class="email">E-mail</label>
+                    <input type="text" id="email" name="email" placeholder="Enter your email">
+                </div>
+                <div class="login">
+                    <label class="email">Password</label>
+                    <input type="password" id="email" name="email" class="password" placeholder="Enter your password">
+                </div>
+                <div class="remember-me">
+                    <input type="checkbox" id="remember-me" name="remember-me" value=true>
+                    <label>Remember me</label>
+                </div>
+                <a href="#" class="login-button">
+                    <label>Login</label>
+                    <img src="/assets/login/Arrow Right.svg" alt="" srcset="">
+                </a>
+            </form>
             <div class="dont-have-account">
                 <label>Don't have an account?</label>
                 <a href="#">Register Now!</a>
@@ -41,7 +43,6 @@
         </div>
     </div>
     <style>
-
         .body {
             display: flex;
             align-items: center;
