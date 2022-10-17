@@ -6,8 +6,8 @@
 
 @section('content')
     <body>
-        <h1>
-            is home
-        </h1>
+    <h1>
+        is home
+    </h1>
     </body>
 @endsection
