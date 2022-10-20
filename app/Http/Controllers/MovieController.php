@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Movie;
+use App\Models\GenreMovie;
 
 class MovieController extends Controller
 {
@@ -14,7 +15,7 @@ class MovieController extends Controller
      */
     public function index()
     {
-        return Movie::all();
+        return Movie::with('genres')->get();
     }
 
     /**
@@ -35,7 +36,17 @@ class MovieController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $genres = $request->genreID;
+        $movie = Movie::create($request->except('genreID'));
+
+        foreach($genres as $genre){
+            GenreMovie::create([
+                'movieID' => $movie->id,
+                'genreID' => $genre
+            ]);
+        }
+
+        return 'sucess';
     }
 
     /**
