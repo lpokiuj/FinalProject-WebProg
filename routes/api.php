@@ -2,8 +2,6 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ActorController;
-use App\Http\Controllers\MovieController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,9 +13,6 @@ use App\Http\Controllers\MovieController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
-Route::resource('actors', ActorController::class);
-Route::resource('movies', MovieController::class);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
