@@ -78,9 +78,12 @@ class MovieController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Movie $movie)
     {
-        //
+        return $movie->load([
+            'actors',
+            'genres'
+        ]);
     }
 
     /**
@@ -101,9 +104,41 @@ class MovieController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Movie $movie)
     {
-        //
+        $data = $request->except([
+            'genreID',
+            'actorID',
+            'charName'
+        ]);
+        $genres = $request->genreID;
+        $actors = $request->actorID;
+        $charNames = $request->charName;
+
+        $data1 = $this->updateImage($data, $request, $movie, 'thumbnail');
+        $data2 = $this->updateImage($data1, $request, $movie, 'background');
+
+        $movie->update($data2);
+
+        GenreMovie::where('movieID', $movie->id)->delete();
+        Character::where('movieID', $movie->id)->delete();
+
+        foreach($genres as $genre){
+            GenreMovie::create([
+                'movieID' => $movie->id,
+                'genreID' => $genre
+            ]);
+        }
+
+        for($i = 0 ; $i < sizeof($actors) ; $i++){
+            Character::create([
+                'movieID' => $movie->id,
+                'actorID' => $actors[$i],
+                'charName' => $charNames[$i]
+            ]);
+        }
+
+        return $movie;
     }
 
     /**
@@ -112,9 +147,11 @@ class MovieController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Movie $movie)
     {
-        //
+        $this->deleteImage($movie, 'background');
+        $this->deleteImage($movie, 'thumbnail');
+        return Movie::destroy($movie->id);
     }
 
     public function uploadImage($data, $request, $type)
@@ -127,5 +164,25 @@ class MovieController extends Controller
         }
 
         return $data;
+    }
+
+    public function updateImage($data, $request, $movie, $type){
+        if($movie[$type] && $request->file($type)){
+            $imagePath = public_path('image/'.$type.'/'.$movie[$type]);
+            unlink($imagePath);
+        }
+        if($request->file($type)){
+            $file = $request->file($type);
+            $filename = date('YmdHi').$file->getClientOriginalName();
+            $file->move(public_path('image/'.$type), $filename);
+            $data[$type] = $filename;
+        }
+
+        return $data;
+    }
+
+    public function deleteImage($movie, $type){
+        $imagePath = public_path('image/'.$type.'/'.$movie[$type]);
+        unlink($imagePath);
     }
 }

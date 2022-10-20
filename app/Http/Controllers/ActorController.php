@@ -53,9 +53,9 @@ class ActorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Actor $actor)
     {
-        return Actor::find($id);
+        return $actor;
     }
 
     /**
@@ -103,7 +103,7 @@ class ActorController extends Controller
     public function destroy($id)
     {
         $actor = Actor::find($id);
-        $imagePath = public_path('image/actor'.$actor->image);
+        $imagePath = public_path('image/actor/'.$actor->image);
         unlink($imagePath);
         return Actor::destroy($id);
     }
