@@ -39,7 +39,7 @@ class ActorController extends Controller
         if($request->file('image')){
             $file = $request->file('image');
             $filename = date('YmdHi').$file->getClientOriginalName();
-            $file->move(public_path('public/Image'), $filename);
+            $file->move(public_path('image/actor'), $filename);
             $data['image'] = $filename;
         }
 
@@ -53,9 +53,9 @@ class ActorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Actor $actor)
     {
-        return Actor::find($id);
+        return $actor;
     }
 
     /**
@@ -83,10 +83,10 @@ class ActorController extends Controller
         if($request->file('image')){
             $file = $request->file('image');
             $filename = date('YmdHi').$file->getClientOriginalName();
-            $file->move(public_path('public/Image'), $filename);
+            $file->move(public_path('image/actor'), $filename);
             $data['image'] = $filename;
 
-            $imagePath = public_path('public/Image/'.$actor->image);
+            $imagePath = public_path('image/actor/'.$actor->image);
             unlink($imagePath);
         }
 
@@ -103,7 +103,7 @@ class ActorController extends Controller
     public function destroy($id)
     {
         $actor = Actor::find($id);
-        $imagePath = public_path('public/Image/'.$actor->image);
+        $imagePath = public_path('image/actor/'.$actor->image);
         unlink($imagePath);
         return Actor::destroy($id);
     }
