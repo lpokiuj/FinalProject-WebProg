@@ -19,8 +19,8 @@ class CreateMoviesTable extends Migration
             $table->string('description');
             $table->string('director');
             $table->date('releaseDate');
-            $table->string('thumbnail');
-            $table->string('background');
+            $table->string('thumbnail')->nullable();
+            $table->string('background')->nullable();
             $table->timestamps();
         });
     }

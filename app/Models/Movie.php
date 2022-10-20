@@ -11,6 +11,11 @@ class Movie extends Model
 
     protected $guarded = [];
 
+    public function actors()
+    {
+        return $this->belongsToMany(Actor::class, 'characters', 'movieID', 'actorID');
+    }
+
     public function genres()
     {
         return $this->belongsToMany(Genre::class, 'genre_movie', 'movieID', 'genreID');

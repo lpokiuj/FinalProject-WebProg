@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Movie;
 use App\Models\GenreMovie;
+use App\Models\Character;
 
 class MovieController extends Controller
 {
@@ -15,7 +16,10 @@ class MovieController extends Controller
      */
     public function index()
     {
-        return Movie::with('genres')->get();
+        return Movie::with([
+            'genres',
+            'actors'
+        ])->get();
     }
 
     /**
@@ -36,8 +40,19 @@ class MovieController extends Controller
      */
     public function store(Request $request)
     {
+        $data = $request->except([
+            'genreID',
+            'actorID',
+            'charName'
+        ]);
         $genres = $request->genreID;
-        $movie = Movie::create($request->except('genreID'));
+        $actors = $request->actorID;
+        $charNames = $request->charName;
+
+        $data1 = $this->uploadImage($data, $request, 'thumbnail');
+        $data2 = $this->uploadImage($data1, $request, 'background');
+
+        $movie = Movie::create($data2);
 
         foreach($genres as $genre){
             GenreMovie::create([
@@ -46,7 +61,15 @@ class MovieController extends Controller
             ]);
         }
 
-        return 'sucess';
+        for($i = 0 ; $i < sizeof($actors) ; $i++){
+            Character::create([
+                'movieID' => $movie->id,
+                'actorID' => $actors[$i],
+                'charName' => $charNames[$i]
+            ]);
+        }
+
+        return $movie;
     }
 
     /**
@@ -92,5 +115,17 @@ class MovieController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function uploadImage($data, $request, $type)
+    {
+        if($request->file($type)){
+            $file = $request->file($type);
+            $filename = date('YmdHi').$file->getClientOriginalName();
+            $file->move(public_path('image/'.$type), $filename);
+            $data[$type] = $filename;
+        }
+
+        return $data;
     }
 }
