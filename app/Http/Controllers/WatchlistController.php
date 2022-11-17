@@ -3,19 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File;
-use App\Models\Actor;
+use App\Models\Watchlist;
+use Illuminate\Support\Facades\DB;
 
-class ActorController extends Controller
+class WatchlistController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return Actor::all();
+        $user = $request->user();
+        $watchlists = Watchlist::with('movie')->where('userID', $user->id)->get();
+        return $watchlists;
     }
 
     /**
@@ -36,16 +38,11 @@ class ActorController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
-        if($request->file('image')){
-            $file = $request->file('image');
-            $filename = date('YmdHi').$file->getClientOriginalName();
-            $file->move(public_path('image/actor'), $filename);
-            $data['image'] = $filename;
-        }
+        $watchlist = new Watchlist;
+        $watchlist['movieID'] = $request['movieID'];
+        $watchlist['userID'] = $request['userID'];
 
-        return Actor::create($data);
-
+        return $watchlist->save();
     }
 
     /**
@@ -54,9 +51,9 @@ class ActorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Actor $actor)
+    public function show($id)
     {
-        return $actor;
+        //
     }
 
     /**
@@ -79,21 +76,12 @@ class ActorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $actor = Actor::find($id);
+        $watchlist = Watchlist::find($id);
         $data = $request->all();
-        if($request->file('image')){
-            $file = $request->file('image');
-            $filename = date('YmdHi').$file->getClientOriginalName();
-            $file->move(public_path('image/actor'), $filename);
-            $data['image'] = $filename;
 
-            $imagePath = public_path('image/actor/'.$actor->image);
-            unlink($imagePath);
-            File::delete($imagePath);
-        }
+        $watchlist->update($data);
+        return $watchlist;
 
-        $actor->update($data);
-        return $actor;
     }
 
     /**
@@ -104,10 +92,6 @@ class ActorController extends Controller
      */
     public function destroy($id)
     {
-        $actor = Actor::find($id);
-        $imagePath = public_path('image/actor/'.$actor->image);
-        unlink($imagePath);
-        File::delete($imagePath);
-        return Actor::destroy($id);
+        return Watchlist::destroy($id);
     }
 }

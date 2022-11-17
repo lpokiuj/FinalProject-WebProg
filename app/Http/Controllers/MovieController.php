@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use App\Models\Movie;
 use App\Models\GenreMovie;
 use App\Models\Character;
@@ -170,6 +171,7 @@ class MovieController extends Controller
         if($movie[$type] && $request->file($type)){
             $imagePath = public_path('image/'.$type.'/'.$movie[$type]);
             unlink($imagePath);
+            File::delete($imagePath);
         }
         if($request->file($type)){
             $file = $request->file($type);
@@ -184,5 +186,6 @@ class MovieController extends Controller
     public function deleteImage($movie, $type){
         $imagePath = public_path('image/'.$type.'/'.$movie[$type]);
         unlink($imagePath);
+        File::delete($imagePath);
     }
 }
