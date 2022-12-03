@@ -40,7 +40,7 @@
     <style>
         /*footer*/
         footer {
-            background-color: #1F1F1F;
+            background-color: #ff0000;
             height: 300px;
             display: flex;
             align-items: center;
