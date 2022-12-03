@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use App\Models\Actor;
 
 class ActorController extends Controller
@@ -14,7 +15,8 @@ class ActorController extends Controller
      */
     public function index()
     {
-        return Actor::all();
+        $actors = Actor::all();
+        return view('actor.index', ['actors' => $actors]);
     }
 
     /**
@@ -24,7 +26,7 @@ class ActorController extends Controller
      */
     public function create()
     {
-        //
+        return view('actor.create');
     }
 
     /**
@@ -39,12 +41,12 @@ class ActorController extends Controller
         if($request->file('image')){
             $file = $request->file('image');
             $filename = date('YmdHi').$file->getClientOriginalName();
-            $file->move(public_path('public/Image'), $filename);
+            $file->move(public_path('image/actor'), $filename);
             $data['image'] = $filename;
         }
 
-        return Actor::create($data);
-
+        Actor::create($data);
+        return redirect('/actors');
     }
 
     /**
@@ -53,9 +55,9 @@ class ActorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Actor $actor)
     {
-        return Actor::find($id);
+        return $actor;
     }
 
     /**
@@ -83,15 +85,16 @@ class ActorController extends Controller
         if($request->file('image')){
             $file = $request->file('image');
             $filename = date('YmdHi').$file->getClientOriginalName();
-            $file->move(public_path('public/Image'), $filename);
+            $file->move(public_path('image/actor'), $filename);
             $data['image'] = $filename;
 
-            $imagePath = public_path('public/Image/'.$actor->image);
+            $imagePath = public_path('image/actor/'.$actor->image);
             unlink($imagePath);
+            File::delete($imagePath);
         }
 
         $actor->update($data);
-        return $actor;
+        return redirect('/actors/'.$id);
     }
 
     /**
@@ -103,8 +106,9 @@ class ActorController extends Controller
     public function destroy($id)
     {
         $actor = Actor::find($id);
-        $imagePath = public_path('public/Image/'.$actor->image);
+        $imagePath = public_path('image/actor/'.$actor->image);
         unlink($imagePath);
+        File::delete($imagePath);
         return Actor::destroy($id);
     }
 }
