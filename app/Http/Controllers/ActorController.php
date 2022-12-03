@@ -15,7 +15,8 @@ class ActorController extends Controller
      */
     public function index()
     {
-        return Actor::all();
+        $actors = Actor::all();
+        return view('actor.index', ['actors' => $actors]);
     }
 
     /**
@@ -25,7 +26,7 @@ class ActorController extends Controller
      */
     public function create()
     {
-        //
+        return view('actor.create');
     }
 
     /**
@@ -44,8 +45,8 @@ class ActorController extends Controller
             $data['image'] = $filename;
         }
 
-        return Actor::create($data);
-
+        Actor::create($data);
+        return redirect('/actors');
     }
 
     /**
@@ -93,7 +94,7 @@ class ActorController extends Controller
         }
 
         $actor->update($data);
-        return $actor;
+        return redirect('/actors/'.$id);
     }
 
     /**
