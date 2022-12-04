@@ -41,6 +41,21 @@ class MovieController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'title' => ['required', 'min: 2', 'max: 50'],
+            'description' => ['required', 'min: 8'],
+            'genre' => ['required', 'array'],
+            'genre.*' => ['required', 'numeric'],
+            'actor' => ['required', 'array'],
+            'actor.*' => ['required', 'numeric'],
+            'charName' => ['required', 'array'],
+            'charName.*' => ['required', 'numeric'],
+            'director' => ['required', 'min: 3'],
+            'releaseDate' => ['required', 'date'],
+            'thumbnail' => ['required', 'image'],
+            'background' => ['required', 'image']
+        ]);
+
         $data = $request->except([
             'genreID',
             'actorID',
@@ -107,6 +122,21 @@ class MovieController extends Controller
      */
     public function update(Request $request, Movie $movie)
     {
+        $request->validate([
+            'title' => ['required', 'min: 2', 'max: 50'],
+            'description' => ['required', 'min: 8'],
+            'genre' => ['required', 'array'],
+            'genre.*' => ['required', 'numeric'],
+            'actor' => ['required', 'array'],
+            'actor.*' => ['required', 'numeric'],
+            'charName' => ['required', 'array'],
+            'charName.*' => ['required', 'numeric'],
+            'director' => ['required', 'min: 3'],
+            'releaseDate' => ['required', 'date'],
+            'thumbnail' => ['required', 'image'],
+            'background' => ['required', 'image']
+        ]);
+
         $data = $request->except([
             'genreID',
             'actorID',
