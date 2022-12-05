@@ -38,9 +38,9 @@ class ActorController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => ['required', 'min:3'],
+            'name' => ['required', 'min: 3'],
             'gender' => ['required'],
-            'biography' => ['required', 'min:10'],
+            'biography' => ['required', 'min: 10'],
             'DOB' => ['required', 'date'],
             'POB' => ['required'],
             'image' => ['required', 'image'],
@@ -90,6 +90,16 @@ class ActorController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'name' => ['required', 'min: 3'],
+            'gender' => ['required'],
+            'biography' => ['required', 'min: 10'],
+            'DOB' => ['required', 'date'],
+            'POB' => ['required'],
+            'image' => ['required', 'image'],
+            'popularity' => ['required', 'numeric']
+        ]);
+
         $actor = Actor::find($id);
         $data = $request->all();
         if($request->file('image')){
