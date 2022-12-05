@@ -7,6 +7,17 @@
     <title>Document</title>
 </head>
 <body>
+
+    @if ($errors->any())
+        <h1>Error</h1>
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    @endif
+
+
     <form action="/actors" method="POST" enctype="multipart/form-data" style="display: flex; flex-direction:column">
         @csrf
         <label for="name">Name</label>
