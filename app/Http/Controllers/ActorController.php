@@ -37,6 +37,16 @@ class ActorController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => ['required', 'min:3'],
+            'gender' => ['required'],
+            'biography' => ['required', 'min:10'],
+            'DOB' => ['required', 'date'],
+            'POB' => ['required'],
+            'image' => ['required', 'image'],
+            'popularity' => ['required', 'numeric']
+        ]);
+
         $data = $request->all();
         if($request->file('image')){
             $file = $request->file('image');
