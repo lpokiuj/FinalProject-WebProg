@@ -9,7 +9,8 @@
             <img src="{{url($actor->image)}}" alt="">
             <div class="card-body p-0">
             <h5 class="card-title my-2">{{ $actor->name }}</h5>
-            {{-- <h6>{{$actor->movies[0]['title']}}</h6> --}}
+            <h6>{{$actor->movies->first()->title}}</h6>
+            {{-- @dd($actor->movies->first()->title) --}}
             </div>
         </div>
     </div>

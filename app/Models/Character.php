@@ -10,7 +10,7 @@ class Character extends Model
     use HasFactory;
 
     protected $guarded = [];
-    public function movies(){
-        return $this->belongsTo(Movie::class, 'movieID', 'id');
-    }
+    // public function movies(){
+    //     return $this->belongsTo(Movie::class, 'movieID', 'id');
+    // }
 }
