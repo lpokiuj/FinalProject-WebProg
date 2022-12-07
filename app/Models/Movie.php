@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -24,5 +25,13 @@ class Movie extends Model
     public function users()
     {
         return $this->belongsToMany(User::class, 'watchlists', 'movieID', 'userID');
+    }
+
+    public function scopeWithGenre(Builder $query, $genre)
+    {
+        if(!is_null($genre)){
+            return $query->whereRelation('genres', 'genreName', 'LIKE', '%'.$genre.'%');
+        }
+        return $query;
     }
 }

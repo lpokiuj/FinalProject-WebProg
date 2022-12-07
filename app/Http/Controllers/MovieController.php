@@ -17,14 +17,24 @@ class MovieController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $genreQuery = $request->query('genre', '');
+
         $movies = Movie::with([
             'genres',
             'actors'
         ])->get();
 
-        return view('movie.view', ['movies' => $movies]);
+        $queriedMovies = Movie::with([
+            'genres',
+            'actors'
+        ])->withGenre($genreQuery)->get();
+
+        return view('movie.view', [
+            'movies' => $movies,
+            'queriedMovies' => $queriedMovies
+        ]);
     }
 
     /**

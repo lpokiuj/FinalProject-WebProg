@@ -76,7 +76,7 @@
         <div class="row" style="padding: 1rem 0;">
             <div class="d-flex">
                 @foreach($genres as $genre)
-                    <a class="me-3 py-1 px-4 d-flex justify-content-center text-white" style="background-color: #2B2B2B; border-radius: 5px; text-decoration: none; cursor: pointer;" class="text-white">{{$genre->genreName}}</a>
+                    <a href="/movies?genre={{ $genre->genreName }}" class="me-3 py-1 px-4 d-flex justify-content-center text-white" style="background-color: #2B2B2B; border-radius: 5px; text-decoration: none; cursor: pointer;" class="text-white">{{$genre->genreName}}</a>
                 @endforeach
             </div>
         </div>
@@ -100,7 +100,7 @@
         </div>
         <!-- List Movie -->
         <div class="row">
-        @foreach($movies as $movie)
+        @foreach($queriedMovies as $movie)
             <a href="#" class="card p-2 m-2" style="width: 15rem; text-decoration:none;cursor: pointer; background-color: #121117;">
                 <img src="{{url('storage/'.$movie->thumbnail)}}" style="height: 18rem; object-fit: cover;" alt="">
                 <div class="card-body p-0">
