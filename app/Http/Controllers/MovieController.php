@@ -23,7 +23,7 @@ class MovieController extends Controller
             'actors'
         ])->get();
 
-        return view('movie.index', ['movies' => $movies]);
+        return view('movie.view', ['movies' => $movies]);
     }
 
     /**
