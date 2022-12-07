@@ -12,11 +12,11 @@
             <div class="title-in-footer-desc-text">is a website that contains list of movie</div>
         </div>
         <div class="social-media">
-            <img src="assets/footer/icons8-twitter-60.png" alt="">
-            <img src="assets/footer/icons8-instagram-60.png" alt="">
-            <img src="assets/footer/icons8-facebook-f-60.png" alt="">
-            <img src="assets/footer/icons8-reddit-60.png" alt="">
-            <img src="assets/footer/icons8-youtube-60.png" alt="">
+            <img src="/assets/footer/icons8-twitter-60.png" alt="">
+            <img src="/assets/footer/icons8-instagram-60.png" alt="">
+            <img src="/assets/footer/icons8-facebook-f-60.png" alt="">
+            <img src="/assets/footer/icons8-reddit-60.png" alt="">
+            <img src="/assets/footer/icons8-youtube-60.png" alt="">
         </div>
         <div class="other">
             <a href="#" class="privacy">Privacy Policy</a>

@@ -25,9 +25,13 @@ Route::post('/register', [UserController::class, 'register']);
 Route::post('/login', [UserController::class, 'login']);
 
 Route::get('/', function () {
-    return view('home');
+    return redirect('/movies');
 });
 
 Route::get('/login', function(){
     return view('login');
+});
+
+Route::get('/register', function(){
+    return view('register');
 });

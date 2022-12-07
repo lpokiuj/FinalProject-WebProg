@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\File;
 use App\Models\Movie;
 use App\Models\GenreMovie;
 use App\Models\Character;
+use App\Models\Genre;
 
 class MovieController extends Controller
 {
@@ -17,10 +18,12 @@ class MovieController extends Controller
      */
     public function index()
     {
-        return Movie::with([
+        $movies = Movie::with([
             'genres',
             'actors'
         ])->get();
+
+        return view('movie.view', ['movies' => $movies]);
     }
 
     /**
@@ -100,6 +103,7 @@ class MovieController extends Controller
             'actors',
             'genres'
         ]);
+
     }
 
     /**
