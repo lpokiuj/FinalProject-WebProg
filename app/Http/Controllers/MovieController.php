@@ -8,6 +8,7 @@ use App\Models\Movie;
 use App\Models\GenreMovie;
 use App\Models\Character;
 use App\Models\Genre;
+use Illuminate\Support\Facades\Storage;
 
 class MovieController extends Controller
 {
@@ -52,7 +53,7 @@ class MovieController extends Controller
             'actorID' => ['required', 'array'],
             'actorID.*' => ['required', 'numeric'],
             'charName' => ['required', 'array'],
-            'charName.*' => ['required', 'numeric'],
+            'charName.*' => ['required'],
             'director' => ['required', 'min: 3'],
             'releaseDate' => ['required', 'date'],
             'thumbnail' => ['required', 'image'],
@@ -68,10 +69,10 @@ class MovieController extends Controller
         $actors = $request->actorID;
         $charNames = $request->charName;
 
-        $data1 = $this->uploadImage($data, $request, 'thumbnail');
-        $data2 = $this->uploadImage($data1, $request, 'background');
+        $data['thumbnail'] = Storage::putFile('images/thumbnail', $request->file('thumbnail'));
+        $data['background'] = Storage::putFile('images/background', $request->file('background'));
 
-        $movie = Movie::create($data2);
+        $movie = Movie::create($data);
 
         foreach($genres as $genre){
             GenreMovie::create([
@@ -134,7 +135,7 @@ class MovieController extends Controller
             'actorID' => ['required', 'array'],
             'actorID.*' => ['required', 'numeric'],
             'charName' => ['required', 'array'],
-            'charName.*' => ['required', 'numeric'],
+            'charName.*' => ['required'],
             'director' => ['required', 'min: 3'],
             'releaseDate' => ['required', 'date'],
             'thumbnail' => ['required', 'image'],
@@ -150,10 +151,15 @@ class MovieController extends Controller
         $actors = $request->actorID;
         $charNames = $request->charName;
 
-        $data1 = $this->updateImage($data, $request, $movie, 'thumbnail');
-        $data2 = $this->updateImage($data1, $request, $movie, 'background');
+        Storage::delete([
+            $movie->thumbnail,
+            $movie->background
+        ]);
 
-        $movie->update($data2);
+        $data['thumbnail'] = Storage::putFile('images/thumbnail', $request->file('thumbnail'));
+        $data['background'] = Storage::putFile('images/background', $request->file('background'));
+
+        $movie->update($data);
 
         GenreMovie::where('movieID', $movie->id)->delete();
         Character::where('movieID', $movie->id)->delete();
@@ -184,42 +190,11 @@ class MovieController extends Controller
      */
     public function destroy(Movie $movie)
     {
-        $this->deleteImage($movie, 'background');
-        $this->deleteImage($movie, 'thumbnail');
+        Storage::delete([
+            $movie->thumbnail,
+            $movie->background
+        ]);
         return Movie::destroy($movie->id);
     }
 
-    public function uploadImage($data, $request, $type)
-    {
-        if($request->file($type)){
-            $file = $request->file($type);
-            $filename = date('YmdHi').$file->getClientOriginalName();
-            $file->move(public_path('image/'.$type), $filename);
-            $data[$type] = $filename;
-        }
-
-        return $data;
-    }
-
-    public function updateImage($data, $request, $movie, $type){
-        if($movie[$type] && $request->file($type)){
-            $imagePath = public_path('image/'.$type.'/'.$movie[$type]);
-            unlink($imagePath);
-            File::delete($imagePath);
-        }
-        if($request->file($type)){
-            $file = $request->file($type);
-            $filename = date('YmdHi').$file->getClientOriginalName();
-            $file->move(public_path('image/'.$type), $filename);
-            $data[$type] = $filename;
-        }
-
-        return $data;
-    }
-
-    public function deleteImage($movie, $type){
-        $imagePath = public_path('image/'.$type.'/'.$movie[$type]);
-        unlink($imagePath);
-        File::delete($imagePath);
-    }
 }

@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File;
 use App\Models\Actor;
 use App\Models\Movie;
+use Illuminate\Support\Facades\Storage;
 
 class ActorController extends Controller
 {
@@ -17,7 +17,7 @@ class ActorController extends Controller
     public function index()
     {
         $actors = Actor::all();
-        
+
         return view('actor.index', ['actors' => $actors]);
     }
 
@@ -50,12 +50,7 @@ class ActorController extends Controller
         ]);
 
         $data = $request->all();
-        if($request->file('image')){
-            $file = $request->file('image');
-            $filename = date('YmdHi').$file->getClientOriginalName();
-            $file->move(public_path('image/actor'), $filename);
-            $data['image'] = $filename;
-        }
+        $data['image'] = Storage::putFile('images/actor', $request->file('image'));
 
         Actor::create($data);
         return redirect('/actors');
@@ -106,16 +101,8 @@ class ActorController extends Controller
 
         $actor = Actor::find($id);
         $data = $request->all();
-        if($request->file('image')){
-            $file = $request->file('image');
-            $filename = date('YmdHi').$file->getClientOriginalName();
-            $file->move(public_path('image/actor'), $filename);
-            $data['image'] = $filename;
-
-            $imagePath = public_path('image/actor/'.$actor->image);
-            unlink($imagePath);
-            File::delete($imagePath);
-        }
+        Storage::delete($actor->image);
+        $data['image'] = Storage::putFile('images/actor', $request->file('image'));
 
         $actor->update($data);
         return redirect('/actors/'.$id);
@@ -130,9 +117,7 @@ class ActorController extends Controller
     public function destroy($id)
     {
         $actor = Actor::find($id);
-        $imagePath = public_path('image/actor/'.$actor->image);
-        unlink($imagePath);
-        File::delete($imagePath);
+        Storage::delete($actor->image);
         return Actor::destroy($id);
     }
 }
