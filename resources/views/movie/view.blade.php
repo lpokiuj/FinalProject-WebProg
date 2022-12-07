@@ -67,8 +67,12 @@
                     <h3 class="text-white">Show</h3>
                 </div>
                 <div class="d-flex align-items-center">
-                    <form class="form-inline my-2 my-lg-0" style="padding: 0 2rem;">
-                    <input class="form-control mr-sm-2" style="background-color: #2B2B2B; color:white" type="search" placeholder="Search Movies Name.." aria-label="Search Movies">
+                    <form class="form-inline my-2 my-lg-0" style="padding: 0 2rem;" action="/movies">
+                        <input type="hidden" name="genre" value="{{ request('genre', '') }}">
+                        <input type="hidden" name="sort" value="{{ request('sort', '') }}">
+                        <input class="form-control mr-sm-2" style="background-color: #2B2B2B; color:white" type="search" placeholder="Search Movies Name.." aria-label="Search Movies" name="search" value="{{ request('search') }}">
+                        <input type="submit" style="display: none">
+                    </form>
                 </div>
             </div>
         </div>
@@ -76,7 +80,7 @@
         <div class="row" style="padding: 1rem 0;">
             <div class="d-flex">
                 @foreach($genres as $genre)
-                    <a class="me-3 py-1 px-4 d-flex justify-content-center text-white" style="background-color: #2B2B2B; border-radius: 5px; text-decoration: none; cursor: pointer;" class="text-white">{{$genre->genreName}}</a>
+                    <a href="{{ request()->fullUrlWithQuery(['genre' => $genre->genreName]) }}" class="me-3 py-1 px-4 d-flex justify-content-center text-white" style="background-color: #2B2B2B; border-radius: 5px; text-decoration: none; cursor: pointer;" class="text-white">{{$genre->genreName}}</a>
                 @endforeach
             </div>
         </div>
@@ -84,9 +88,9 @@
         <div class="row">
             <div class="d-flex">
             <div class="text-white me-3">Sort by: </div>
-                <a class="me-3 py-1 px-4 d-flex justify-content-center text-white" style="background-color: #2B2B2B; border-radius: 5px; text-decoration: none; cursor: pointer;" href="#">Latest</a>
-                <a class="me-3 py-1 px-4 d-flex justify-content-center text-white" style="background-color: #2B2B2B; border-radius: 5px; text-decoration: none; cursor: pointer;" href="#">A-Z</a>
-                <a class="me-3 py-1 px-4 d-flex justify-content-center text-white" style="background-color: #2B2B2B; border-radius: 5px; text-decoration: none; cursor: pointer;" href="#">Z-A</a>
+                <a class="me-3 py-1 px-4 d-flex justify-content-center text-white" style="background-color: #2B2B2B; border-radius: 5px; text-decoration: none; cursor: pointer;" href="{{ request()->fullUrlWithQuery(['sort' => 'latest']) }}">Latest</a>
+                <a class="me-3 py-1 px-4 d-flex justify-content-center text-white" style="background-color: #2B2B2B; border-radius: 5px; text-decoration: none; cursor: pointer;" href="{{ request()->fullUrlWithQuery(['sort' => 'ascending']) }}">A-Z</a>
+                <a class="me-3 py-1 px-4 d-flex justify-content-center text-white" style="background-color: #2B2B2B; border-radius: 5px; text-decoration: none; cursor: pointer;" href="{{ request()->fullUrlWithQuery(['sort' => 'descending']) }}">Z-A</a>
             </div>
         </div>
         <!-- Add Movie -->
@@ -100,7 +104,7 @@
         </div>
         <!-- List Movie -->
         <div class="row">
-        @foreach($movies as $movie)
+        @foreach($queriedMovies as $movie)
             <a href="#" class="card p-2 m-2" style="width: 15rem; text-decoration:none;cursor: pointer; background-color: #121117;">
                 <img src="{{url('storage/'.$movie->thumbnail)}}" style="height: 18rem; object-fit: cover;" alt="">
                 <div class="card-body p-0">
@@ -110,6 +114,11 @@
             </a>
         @endforeach
         </div>
+
+        <div class="row">
+            {{ $queriedMovies->links() }}
+        </div>
+
     </div>
 </div>
 @endsection
