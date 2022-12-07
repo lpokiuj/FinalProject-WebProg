@@ -20,6 +20,16 @@ class CharacterSeeder extends Seeder
                 'charName' => 'Peter Parker',
                 'movieID' => 1,
                 'actorID' => 1
+            ],
+            [
+                'charName' => 'Gwen Stacy',
+                'movieID' => 1,
+                'actorID' => 2
+            ],
+            [
+                'charName' => 'Dr. Strange',
+                'movieID' => 1,
+                'actorID' => 3
             ]
         ]);
     }

@@ -19,11 +19,44 @@ class MovieSeeder extends Seeder
             [
                 'title' => 'Spider-man: No Way Home',
                 'description' => 'this is spiderman',
-                'director' => "Tom Hankins",
-                'releaseDate' => '2022-12-14',
-                'thumbnail' => 'sdfsdf',
-                'background' => 'sdfdsf',
+                'director' => 'Jon Watts',
+                'releaseDate' => '2021-12-15',
+                'thumbnail' => 'storage/image/movie/spiderman-no-way-home.jpg',
+                'background' => 'storage/image/movie/spiderman-no-way-home.jpg',
+            ],
+            [
+                'title' => 'Spider-man: No Way Home',
+                'description' => 'this is spiderman',
+                'director' => 'Jon Watts',
+                'releaseDate' => '2021-12-15',
+                'thumbnail' => 'storage/image/movie/spiderman-no-way-home.jpg',
+                'background' => 'storage/image/movie/spiderman-no-way-home.jpg',
+            ],
+            [
+                'title' => 'Spider-man: No Way Home',
+                'description' => 'this is spiderman',
+                'director' => 'Jon Watts',
+                'releaseDate' => '2021-12-15',
+                'thumbnail' => 'storage/image/movie/spiderman-no-way-home.jpg',
+                'background' => 'storage/image/movie/spiderman-no-way-home.jpg',
+            ],
+            [
+                'title' => 'Spider-man: No Way Home',
+                'description' => 'this is spiderman',
+                'director' => 'Jon Watts',
+                'releaseDate' => '2021-12-15',
+                'thumbnail' => 'storage/image/movie/spiderman-no-way-home.jpg',
+                'background' => 'storage/image/movie/spiderman-no-way-home.jpg',
+            ],
+            [
+                'title' => 'Spider-man: No Way Home',
+                'description' => 'this is spiderman',
+                'director' => 'Jon Watts',
+                'releaseDate' => '2021-12-15',
+                'thumbnail' => 'storage/image/movie/spiderman-no-way-home.jpg',
+                'background' => 'storage/image/movie/spiderman-no-way-home.jpg',
             ]
+                
         ]);
     }
 }

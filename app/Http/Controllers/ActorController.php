@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use App\Models\Actor;
+use App\Models\Movie;
 
 class ActorController extends Controller
 {
@@ -16,6 +17,7 @@ class ActorController extends Controller
     public function index()
     {
         $actors = Actor::all();
+        
         return view('actor.index', ['actors' => $actors]);
     }
 
@@ -65,9 +67,11 @@ class ActorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Actor $actor)
+    public function show($id)
     {
-        return $actor;
+        $actor = Actor::find($id)->load('movies');
+        // dd($actor);
+        return view('actor.show', ['actor' => $actor]);
     }
 
     /**
