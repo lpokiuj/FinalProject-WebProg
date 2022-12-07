@@ -24,10 +24,14 @@
         <div class="d-flex flex-wrap">
         @foreach ($actors as $actor)
             <a href="/actors/{{$actor->id}}" class="card p-2 m-2" style="width: 15rem; text-decoration:none;cursor: pointer;">
-                <img src="{{url($actor->image)}}" style="height: 18rem; object-fit: cover;" alt="">
+                <img src="{{url('storage/'.$actor->image)}}" style="height: 18rem; object-fit: cover;" alt="">
                 <div class="card-body p-0">
                 <h5 class="card-title my-2 text-white">{{ $actor->name }}</h5>
-                <h6 class="desc">{{$actor->movies->first()->title}}</h6>
+                @if($actor->movies()->exists())
+                    <h6 class="desc">{{$actor->movies->first()->title}}</h6>
+                @else
+                    <h6 class="desc">No Movies</h6>
+                @endif
                 </div>
             </a>
         @endforeach
