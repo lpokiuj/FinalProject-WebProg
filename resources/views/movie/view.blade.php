@@ -4,7 +4,6 @@
 
 @section('content')
 <div>
-    test
     <div class="container">
         <div class="row" style="height: 500px;">
             <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="false">
