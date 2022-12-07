@@ -76,7 +76,7 @@
         <div class="row" style="padding: 1rem 0;">
             <div class="d-flex">
                 @foreach($genres as $genre)
-                    <a href="/movies?genre={{ $genre->genreName }}" class="me-3 py-1 px-4 d-flex justify-content-center text-white" style="background-color: #2B2B2B; border-radius: 5px; text-decoration: none; cursor: pointer;" class="text-white">{{$genre->genreName}}</a>
+                    <a href="{{ request()->fullUrlWithQuery(['genre' => $genre->genreName]) }}" class="me-3 py-1 px-4 d-flex justify-content-center text-white" style="background-color: #2B2B2B; border-radius: 5px; text-decoration: none; cursor: pointer;" class="text-white">{{$genre->genreName}}</a>
                 @endforeach
             </div>
         </div>
@@ -84,9 +84,9 @@
         <div class="row">
             <div class="d-flex">
             <div class="text-white me-3">Sort by: </div>
-                <a class="me-3 py-1 px-4 d-flex justify-content-center text-white" style="background-color: #2B2B2B; border-radius: 5px; text-decoration: none; cursor: pointer;" href="#">Latest</a>
-                <a class="me-3 py-1 px-4 d-flex justify-content-center text-white" style="background-color: #2B2B2B; border-radius: 5px; text-decoration: none; cursor: pointer;" href="#">A-Z</a>
-                <a class="me-3 py-1 px-4 d-flex justify-content-center text-white" style="background-color: #2B2B2B; border-radius: 5px; text-decoration: none; cursor: pointer;" href="#">Z-A</a>
+                <a class="me-3 py-1 px-4 d-flex justify-content-center text-white" style="background-color: #2B2B2B; border-radius: 5px; text-decoration: none; cursor: pointer;" href="{{ request()->fullUrlWithQuery(['sort' => 'latest']) }}">Latest</a>
+                <a class="me-3 py-1 px-4 d-flex justify-content-center text-white" style="background-color: #2B2B2B; border-radius: 5px; text-decoration: none; cursor: pointer;" href="{{ request()->fullUrlWithQuery(['sort' => 'ascending']) }}">A-Z</a>
+                <a class="me-3 py-1 px-4 d-flex justify-content-center text-white" style="background-color: #2B2B2B; border-radius: 5px; text-decoration: none; cursor: pointer;" href="{{ request()->fullUrlWithQuery(['sort' => 'descending']) }}">Z-A</a>
             </div>
         </div>
         <!-- Add Movie -->

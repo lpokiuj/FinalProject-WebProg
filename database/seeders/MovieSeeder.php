@@ -55,8 +55,15 @@ class MovieSeeder extends Seeder
                 'releaseDate' => '2021-12-15',
                 'thumbnail' => 'images/movie/spiderman-no-way-home.jpg',
                 'background' => 'images/movie/spiderman-no-way-home.jpg',
-            ]
-                
+            ],
+            [
+                'title' => 'Le fishe',
+                'description' => 'this is le fishe',
+                'director' => 'Le fishe',
+                'releaseDate' => '2021-12-14',
+                'thumbnail' => 'images/movie/spiderman-no-way-home.jpg',
+                'background' => 'images/movie/spiderman-no-way-home.jpg',
+            ],
         ]);
     }
 }

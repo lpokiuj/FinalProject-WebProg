@@ -25,7 +25,43 @@ class MovieGenresSeeder extends Seeder
                 'genreID' => 4,
             ],
             [
-                'movieID' => 1,
+                'movieID' => 2,
+                'genreID' => 3,
+            ],
+            [
+                'movieID' => 3,
+                'genreID' => 1,
+            ],
+            [
+                'movieID' => 4,
+                'genreID' => 5,
+            ],
+            [
+                'movieID' => 5,
+                'genreID' => 7,
+            ],
+            [
+                'movieID' => 3,
+                'genreID' => 1,
+            ],
+            [
+                'movieID' => 4,
+                'genreID' => 5,
+            ],
+            [
+                'movieID' => 5,
+                'genreID' => 7,
+            ],
+            [
+                'movieID' => 6,
+                'genreID' => 1,
+            ],
+            [
+                'movieID' => 2,
+                'genreID' => 5,
+            ],
+            [
+                'movieID' => 3,
                 'genreID' => 7,
             ],
         ]);

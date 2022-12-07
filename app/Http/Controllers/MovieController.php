@@ -20,6 +20,7 @@ class MovieController extends Controller
     public function index(Request $request)
     {
         $genreQuery = $request->query('genre', '');
+        $sortQuery = $request->query('sort', '');
 
         $movies = Movie::with([
             'genres',
@@ -29,7 +30,7 @@ class MovieController extends Controller
         $queriedMovies = Movie::with([
             'genres',
             'actors'
-        ])->withGenre($genreQuery)->get();
+        ])->withGenre($genreQuery)->withSort($sortQuery)->get();
 
         return view('movie.view', [
             'movies' => $movies,

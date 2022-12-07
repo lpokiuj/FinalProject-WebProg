@@ -34,4 +34,19 @@ class Movie extends Model
         }
         return $query;
     }
+
+    public function scopeWithSort(Builder $query, $sort){
+        if(!is_null($sort)){
+            if($sort == 'latest'){
+                return $query->latest();
+            }
+            if($sort == 'ascending'){
+                return $query->orderBy('title', 'asc');
+            }
+            if($sort == 'descending'){
+                return $query->orderBy('title', 'desc');
+            }
+        }
+        return $query;
+    }
 }
