@@ -103,6 +103,7 @@ class MovieController extends Controller
             'actors',
             'genres'
         ]);
+
     }
 
     /**

@@ -6,8 +6,19 @@
     <div class="d-flex justify-content-center flex-wrap flex-column p-5" style="margin: 0 10rem">
     <div class="d-flex flex-row justify-content-between">
         <h2 style="color: red;">Actor</h2>
-        <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" style="background-color: #2B2B2B; color:white" type="search" placeholder="Search Actor Name.." aria-label="Search Actor">
+        <div class="d-flex align-items-center">
+            <div>
+                <form class="form-inline my-2 my-lg-0 pe-2">
+                <input class="form-control mr-sm-2" style="background-color: #2B2B2B; color:white" type="search" placeholder="Search Actor Name.." aria-label="Search Actor">
+            </div>
+            <div>
+                <button class="text-white me-3 py-1 px-4" style="background-color: red; border-style: none; border-radius: 5px;">
+                    <img style="filter: invert(100%) sepia(98%) saturate(0%) hue-rotate(350deg) brightness(102%) contrast(103%); margin-left: -0.5rem" src="/assets/home/plus.svg" alt="">
+                    Add Actors
+                </button>
+            </div>
+        </div>
+        
         </form>
     </div>
         <div class="d-flex flex-wrap">
