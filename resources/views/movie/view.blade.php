@@ -114,6 +114,11 @@
             </a>
         @endforeach
         </div>
+
+        <div class="row">
+            {{ $queriedMovies->links() }}
+        </div>
+
     </div>
 </div>
 @endsection
