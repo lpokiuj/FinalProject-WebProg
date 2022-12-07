@@ -4,4 +4,7 @@
 
 @section('content')
     <div>{{$movie->title}}</div>
+    @foreach($movie->genres as $genre)
+        <div>{{$genre->genreName}}</div>
+    @endforeach
 @endsection

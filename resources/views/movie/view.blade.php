@@ -51,7 +51,7 @@
             </div>
             @foreach($movies as $movie)
             <a href="/movies/{{$movie->id}}" class="card p-2 m-2" style="width: 15rem; text-decoration:none;cursor: pointer; background-color: #121117;">
-                <img src="{{url($movie->thumbnail)}}" style="height: 18rem; object-fit: cover;" alt="">
+                <img src="{{url('storage/'.$movie->thumbnail)}}" style="height: 18rem; object-fit: cover;" alt="">
                 <div class="card-body p-0">
                     <div class="text-white" style="margin: 0.5rem 0 0.3rem 0;">{{$movie->title}}</div>
                     <div class="" style="margin: 0rem 0 0.3rem 0; color: #4A4B50;">{{ date('Y', strtotime($movie->releaseDate))}}</div>
@@ -102,7 +102,7 @@
         <div class="row">
         @foreach($movies as $movie)
             <a href="#" class="card p-2 m-2" style="width: 15rem; text-decoration:none;cursor: pointer; background-color: #121117;">
-                <img src="{{url($movie->thumbnail)}}" style="height: 18rem; object-fit: cover;" alt="">
+                <img src="{{url('storage/'.$movie->thumbnail)}}" style="height: 18rem; object-fit: cover;" alt="">
                 <div class="card-body p-0">
                     <div class="text-white" style="margin: 0.5rem 0 0.3rem 0;">{{$movie->title}}</div>
                     <div class="" style="margin: 0rem 0 0.3rem 0; color: #4A4B50;">{{ date('Y', strtotime($movie->releaseDate))}}</div>

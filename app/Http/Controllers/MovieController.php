@@ -98,13 +98,16 @@ class MovieController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Movie $movie)
+    public function show($id)
     {
-        return $movie->load([
-            'actors',
-            'genres'
+        $movie = Movie::find($id)->load([
+            'genres',
+            'actors'
         ]);
 
+        return view('movie.show', [
+            'movie' => $movie
+        ]);
     }
 
     /**
