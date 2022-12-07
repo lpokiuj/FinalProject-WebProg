@@ -32,10 +32,12 @@ class Movie extends Model
         if(!is_null($genre)){
             return $query->whereRelation('genres', 'genreName', 'LIKE', '%'.$genre.'%');
         }
+
         return $query;
     }
 
-    public function scopeWithSort(Builder $query, $sort){
+    public function scopeWithSort(Builder $query, $sort)
+    {
         if(!is_null($sort)){
             if($sort == 'latest'){
                 return $query->latest();
@@ -47,6 +49,16 @@ class Movie extends Model
                 return $query->orderBy('title', 'desc');
             }
         }
+
+        return $query;
+    }
+
+    public function scopeWithSearch(Builder $query, $search)
+    {
+        if(!is_null($search)){
+            return $query->where('title', 'LIKE', '%'.$search.'%');
+        }
+
         return $query;
     }
 }

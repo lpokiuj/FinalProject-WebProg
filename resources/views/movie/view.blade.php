@@ -67,8 +67,12 @@
                     <h3 class="text-white">Show</h3>
                 </div>
                 <div class="d-flex align-items-center">
-                    <form class="form-inline my-2 my-lg-0" style="padding: 0 2rem;">
-                    <input class="form-control mr-sm-2" style="background-color: #2B2B2B; color:white" type="search" placeholder="Search Movies Name.." aria-label="Search Movies">
+                    <form class="form-inline my-2 my-lg-0" style="padding: 0 2rem;" action="/movies">
+                        <input type="hidden" name="genre" value="{{ request('genre', '') }}">
+                        <input type="hidden" name="sort" value="{{ request('sort', '') }}">
+                        <input class="form-control mr-sm-2" style="background-color: #2B2B2B; color:white" type="search" placeholder="Search Movies Name.." aria-label="Search Movies" name="search" value="{{ request('search') }}">
+                        <input type="submit" style="display: none">
+                    </form>
                 </div>
             </div>
         </div>

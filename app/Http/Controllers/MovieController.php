@@ -21,6 +21,7 @@ class MovieController extends Controller
     {
         $genreQuery = $request->query('genre', '');
         $sortQuery = $request->query('sort', '');
+        $searchQuery = $request->query('search', '');
 
         $movies = Movie::with([
             'genres',
@@ -30,7 +31,7 @@ class MovieController extends Controller
         $queriedMovies = Movie::with([
             'genres',
             'actors'
-        ])->withGenre($genreQuery)->withSort($sortQuery)->get();
+        ])->withGenre($genreQuery)->withSort($sortQuery)->withSearch($searchQuery)->paginate(10)->withQueryString();
 
         return view('movie.view', [
             'movies' => $movies,
