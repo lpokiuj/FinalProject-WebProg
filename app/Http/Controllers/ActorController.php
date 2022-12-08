@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Actor;
 use App\Models\Movie;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class ActorController extends Controller
 {
@@ -41,7 +43,7 @@ class ActorController extends Controller
     {
         $request->validate([
             'name' => ['required', 'min: 3'],
-            'gender' => ['required'],
+            'gender' => ['required', Rule::in(['Male', 'Female'])],
             'biography' => ['required', 'min: 10'],
             'DOB' => ['required', 'date'],
             'POB' => ['required'],
@@ -65,7 +67,7 @@ class ActorController extends Controller
     public function show($id)
     {
         $actor = Actor::find($id)->load('movies');
-        
+
         return view('actor.show', ['actor' => $actor]);
     }
 
