@@ -65,7 +65,7 @@ class ActorController extends Controller
     public function show($id)
     {
         $actor = Actor::find($id)->load('movies');
-        // dd($actor);
+        
         return view('actor.show', ['actor' => $actor]);
     }
 

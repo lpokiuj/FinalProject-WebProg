@@ -17,7 +17,6 @@
         </ul>
     @endif
 
-
     <form action="/actors" method="POST" enctype="multipart/form-data" style="display: flex; flex-direction:column">
         @csrf
         <label for="name">Name</label>
