@@ -12,10 +12,10 @@
                 <input class="form-control mr-sm-2" style="background-color: #2B2B2B; color:white" type="search" placeholder="Search Actor Name.." aria-label="Search Actor">
             </div>
             <div>
-                <button class="text-white me-3 py-1 px-4" style="background-color: red; border-style: none; border-radius: 5px;">
+                <a href="/actors/create" class="text-white me-3 py-2 px-4" style="background-color: red; border-style: none; border-radius: 5px; text-decoration: none;">
                     <img style="filter: invert(100%) sepia(98%) saturate(0%) hue-rotate(350deg) brightness(102%) contrast(103%); margin-left: -0.5rem" src="/assets/home/plus.svg" alt="">
                     Add Actors
-                </button>
+                </a>
             </div>
         </div>
         

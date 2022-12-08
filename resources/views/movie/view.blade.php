@@ -116,9 +116,21 @@
         </div>
 
         <div class="row">
-            {{ $queriedMovies->links() }}
+            <div class="d-flex justify-content-center">
+                {{ $queriedMovies->links()}}
+            </div>
         </div>
-
+        <!-- <div class="row">
+            <div class="d-flex justify-content-center" >
+                {{ $queriedMovies->links('movie.pagination')}}
+            </div>
+        </div> -->
     </div>
 </div>
+
+<style>
+    .pagination{
+        background-color: black;
+    }
+</style>
 @endsection

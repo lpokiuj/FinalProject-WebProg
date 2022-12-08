@@ -117,8 +117,11 @@ class MovieController extends Controller
             'actors'
         ]);
 
+        $moreMovies = Movie::paginate(5);
+
         return view('movie.show', [
-            'movie' => $movie
+            'movie' => $movie,
+            'moreMovies' => $moreMovies
         ]);
     }
 
