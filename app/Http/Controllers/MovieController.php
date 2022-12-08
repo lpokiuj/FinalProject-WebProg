@@ -28,6 +28,11 @@ class MovieController extends Controller
             'actors'
         ])->get();
 
+        $movie = Movie::find(1)->load([
+            'genres',
+            'actors'
+        ]);
+
         $queriedMovies = Movie::with([
             'genres',
             'actors'
