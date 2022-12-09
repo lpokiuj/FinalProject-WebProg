@@ -93,13 +93,13 @@
                 <a class="me-3 py-1 px-4 d-flex justify-content-center text-white" style="background-color: #2B2B2B; border-radius: 5px; text-decoration: none; cursor: pointer;" href="{{ request()->fullUrlWithQuery(['sort' => 'descending']) }}">Z-A</a>
             </div>
         </div>
-        <!-- Add Movie -->
+        <!-- Add Movie Button-->
         <div class="row">
             <div class="d-flex justify-content-end" style="padding: 0 2rem;">
-                <button class="text-white me-3 py-1 px-4" style="background-color: red; border-style: none; border-radius: 5px;">
+                <a href="/movies/create" class="text-white me-3 py-1 px-4" style="background-color: red; border-style: none; border-radius: 5px; text-decoration: none;">
                 <img style="filter: invert(100%) sepia(98%) saturate(0%) hue-rotate(350deg) brightness(102%) contrast(103%); margin-left: -0.5rem" src="/assets/home/plus.svg" alt="">
                 Add Movie
-                </button>
+                </a>
             </div>
         </div>
         <!-- List Movie -->

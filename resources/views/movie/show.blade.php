@@ -39,6 +39,7 @@
             <img src="{{url('storage/'.$actor->image)}}" style="height: 18rem; object-fit: cover;" alt="">
             <div class="card-body p-0">
                 <h5 class="card-title my-2 text-white">{{$actor->name}}</h5>
+                <h6 class="card-title my-2 " style="color: #4A4B50;">{{$actor->pivot->charName}}</h6>
             </div>
         </a>
         @endforeach
