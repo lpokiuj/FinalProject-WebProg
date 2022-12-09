@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Actor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use App\Models\Movie;
@@ -28,11 +29,6 @@ class MovieController extends Controller
             'actors'
         ])->get();
 
-        $movie = Movie::find(1)->load([
-            'genres',
-            'actors'
-        ]);
-
         $queriedMovies = Movie::with([
             'genres',
             'actors'
@@ -52,6 +48,10 @@ class MovieController extends Controller
     public function create()
     {
         //
+        $actors = Actor::all();
+        $genre = Genre::all();
+
+        return view('movie.create', ['actors' => $actors, 'genres' => $genre]);
     }
 
     /**

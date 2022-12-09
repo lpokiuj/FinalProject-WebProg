@@ -45,7 +45,7 @@
             border: 1px solid red;
         }
         .desc{
-            color: #4A4B50;;
+            color: #4A4B50;
         }
     </style>
 @endsection
