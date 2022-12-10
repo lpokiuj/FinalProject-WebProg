@@ -6,8 +6,8 @@
 <div class="heading d-flex align-items-center">
     <div class="container">
         <div class="row">
-            <button class="text-white d-flex justify-content-center py-2" style="background-color: red; margin-bottom: 0.5rem; border-style: none; border-radius: 5px;">Edit</button>
-            <button class="text-white d-flex justify-content-center py-2" style="background-color: red; margin-bottom: 1rem; border-style: none; border-radius: 5px;">Remove</button>
+            <a href="/movies/{{$movie->id}}/edit" class="text-white d-flex justify-content-center py-2" style="background-color: red; margin-bottom: 0.5rem; border-style: none; border-radius: 5px; text-decoration: none; ">Edit</a>
+            <a class="text-white d-flex justify-content-center py-2" style="background-color: red; margin-bottom: 1rem; border-style: none; border-radius: 5px; text-decoration: none; ">Remove</a>
         </div>
         <div class="row">
             <div class="col-md-4 "><img style="height: 30rem;" src="{{url('storage/'.$movie->thumbnail)}}" alt="" srcset=""></div>

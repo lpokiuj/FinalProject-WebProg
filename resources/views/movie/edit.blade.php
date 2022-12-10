@@ -18,20 +18,22 @@
             @endif 
         </div>
         <div class="row">
-            <form action="/movies" method="POST" enctype="multipart/form-data" class="text-white" style="display: flex; flex-direction:column">
+            <form action="/movies/{{$movie->id}}" method="POST" enctype="multipart/form-data" class="text-white" style="display: flex; flex-direction:column">
                 @csrf
                 <label for="title">Title</label>
-                <input type="text" name="title" id="title">
+                <input type="text" name="title" id="title" value="{{$movie->title}}">
                 <label for="description">Description</label>
-                <textarea type="text" style="height: 150px;" name="description" id="description"></textarea>
+                <textarea type="text" style="height: 150px;" name="description" id="description">{{$movie->description}}</textarea>
                 <label for="genre">Genre</label>
                 <div id="genreInput">
-                    <select  class="form-select" name="genres" id="genre">
-                        <option selected="selected" value="">--Please Select Genre--</option>
-                        @foreach($genres as $genre)
-                            <option value="{{$genre->id}}">{{$genre->genreName}}</option>
-                        @endforeach
-                    </select>
+                    @foreach($movie->genres as $currentGenre)
+                        <select  class="form-select" name="genres" id="genre">
+                            <option selected="selected" value="">{{$currentGenre->genreName}}</option>
+                            @foreach($genres as $genre)
+                                <option value="{{$genre->id}}">{{$genre->genreName}}</option>
+                            @endforeach
+                        </select>
+                    @endforeach
                 </div>
                 <div class="d-flex flex-row-reverse mt-2">
                     <button type="button" class="btn btn-primary col-md-2" id="addMoreGenre">Add More</button>
@@ -39,36 +41,38 @@
                 
                 <div id="actorInput">
                     <div style="margin-bottom: 0rm;">Select Actor</div>
-                    <div class="row ps-4">
-                        <div class="col-md-6 d-flex flex-column">
-                        <label for="actorName">Actor</label>
-                        <select class="form-select" name="actorNames" id="actorName">
-                            <option selected="selected" value="">--Please Select Actor--</option>
-                            @foreach($actors as $actor)
-                                <option value="{{$genre->id}}">{{$actor->name}}</option>
-                            @endforeach
-                        </select>
+                    @foreach($movie->actors as $currentActor)
+                        <div class="row ps-4">
+                            <div class="col-md-6 d-flex flex-column">
+                            <label for="actorName">Actor</label>
+                            <select class="form-select" name="actorNames" id="actorName">
+                                <option selected="selected" value="">{{$currentActor->name}}</option>
+                                @foreach($actors as $actor)
+                                    <option value="{{$genre->id}}">{{$actor->name}}</option>
+                                @endforeach
+                            </select>
+                            </div>
+                            <div class="col-md-6 d-flex flex-column">
+                                <label for="charName">Character Name</label>
+                                <input type="text" name="charName" id="charName">
+                            </div>
                         </div>
-                        <div class="col-md-6 d-flex flex-column">
-                            <label for="charName">Character Name</label>
-                            <input type="text" name="charName" id="charName">
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
                 <div class="d-flex flex-row-reverse mt-2">
                     <button type="button" class="btn btn-primary col-md-2" id="addMoreActors">Add More</button>
                 </div>
                 
                 <label for="director">Director</label>
-                <input type="text" name="director" id="director">
+                <input type="text" name="director" id="director" value="{{$movie->director}}">
                 <label for="releaseDate">Release Date</label>
-                <input type="date" name="releaseDate" id="releaseDate">
+                <input type="date" name="releaseDate" id="releaseDate" value="{{$movie->releaseDate}}">
                 <label for="image">Image URL</label>
-                <input type="file" name="image" id="">
+                <input type="file" name="image" id="" value="{{$movie->thumbnail}}">
                 <label for="background">Background URL</label>
-                <input type="file" name="background" id="background">
+                <input type="file" name="background" id="background" value="{{$movie->background}}">
                 
-                <button class="text-white" style="margin-top: 0.5rem; background-color: red; border: none; border-radius: 5px; padding: 0.5rem; margin-bottom: 2rem;" type="submit">Create</button>
+                <button class="text-white" style="margin-top: 0.5rem; background-color: red; border: none; border-radius: 5px; padding: 0.5rem; margin-bottom: 2rem;" type="submit">Edit</button>
             </form>
         </div>
     </div>

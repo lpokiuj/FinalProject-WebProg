@@ -80,6 +80,8 @@ class ActorController extends Controller
     public function edit($id)
     {
         //
+        $actor = Actor::find($id)->load('movies');
+        return view('actor.edit', ['actor' => $actor]);
     }
 
     /**

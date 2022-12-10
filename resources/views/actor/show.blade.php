@@ -5,8 +5,8 @@
 @section('content')
     <div class="container" style="padding: 2rem 0;">
         <div class="row">
-            <button class="text-white d-flex justify-content-center py-2" style="background-color: red; margin-bottom: 0.5rem; border-style: none; border-radius: 5px;">Edit</button>
-            <button class="text-white d-flex justify-content-center py-2" style="background-color: red; margin-bottom: 1rem; border-style: none; border-radius: 5px;">Remove</button>
+            <a href="/actors/{{$actor->id}}/edit" class="text-white d-flex justify-content-center py-2" style="background-color: red; margin-bottom: 0.5rem; border-style: none; border-radius: 5px; text-decoration: none; cursor: pointer;">Edit</a>
+            <a class="text-white d-flex justify-content-center py-2" style="background-color: red; margin-bottom: 1rem; border-style: none; border-radius: 5px; text-decoration: none;">Remove</a>
         </div>
         <div class="row flex-wrap">
             <div class="col-md-4">

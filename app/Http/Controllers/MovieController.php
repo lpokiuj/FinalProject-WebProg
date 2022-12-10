@@ -27,7 +27,7 @@ class MovieController extends Controller
         $movies = Movie::with([
             'genres',
             'actors'
-        ])->get();
+        ])->paginate(5);
 
         $queriedMovies = Movie::with([
             'genres',
@@ -139,6 +139,14 @@ class MovieController extends Controller
     public function edit($id)
     {
         //
+        $actors = Actor::all();
+        $genre = Genre::all();
+        $movie = Movie::find($id)->load([
+            'genres',
+            'actors'
+        ]);
+
+        return view('movie.edit', ['actors' => $actors, 'genres' => $genre, 'movie'=> $movie]);
     }
 
     /**
