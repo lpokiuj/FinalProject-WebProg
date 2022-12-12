@@ -28,18 +28,19 @@
                 <h4 class="sub">Biography</h4>
                 <div class="text-white">{{$actor->biography}}</div>
                 <h4 class="sub">Known For</h4>
-                @foreach($actor->movies as $movie)
-                    <a href="/movies/{{$movie->id}}" class="card p-2 m-2" style="width: 15rem; text-decoration:none;cursor: pointer; background-color: #2B2B2B">
-                        <img src="{{url('storage/'.$movie->thumbnail)}}" style="height: 18rem; object-fit: cover;" alt="">
-                        <div class="card-body p-0">
-                            <div class="text-white" style="margin: 0.5rem 0 0.3rem 0;">{{$movie->title}}</div>
-                        </div>
-                    </a>
-                @endforeach
+                <div class="d-flex">
+                    @foreach($actor->movies as $movie)
+                        <a href="/movies/{{$movie->id}}" class="card p-2 m-2" style="width: 15rem; text-decoration:none;cursor: pointer; background-color: #2B2B2B">
+                            <img src="{{url('storage/'.$movie->thumbnail)}}" style="height: 18rem; object-fit: cover;" alt="">
+                            <div class="card-body p-0">
+                                <div class="text-white" style="margin: 0.5rem 0 0.3rem 0;">{{$movie->title}}</div>
+                            </div>
+                        </a>
+                    @endforeach
+                </div>
+                
             </div>
         </div>
-
-        
     </div>
     <style>
         .sub-desc{

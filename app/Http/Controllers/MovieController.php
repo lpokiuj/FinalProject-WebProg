@@ -106,7 +106,7 @@ class MovieController extends Controller
             ]);
         }
 
-        return $movie;
+        return redirect('/movies');
     }
 
     /**
@@ -121,6 +121,8 @@ class MovieController extends Controller
             'genres',
             'actors'
         ]);
+
+        // dd($movie);
 
         $moreMovies = Movie::paginate(5);
 
@@ -210,7 +212,7 @@ class MovieController extends Controller
             ]);
         }
 
-        return $movie;
+        return redirect('/movies');
     }
 
     /**
@@ -225,7 +227,9 @@ class MovieController extends Controller
             $movie->thumbnail,
             $movie->background
         ]);
-        return Movie::destroy($movie->id);
+        Movie::destroy($movie->id);
+
+        return redirect('/movies');
     }
 
 }

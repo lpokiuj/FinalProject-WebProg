@@ -35,11 +35,11 @@
                             <div class="row d-flex justify-content-center">
                                 <div>
                                     <div class="d-flex align-items-center" style="margin-top: 10rem;">
-                                        <div class="me-2">{{$movies[0]->genres->first()->genreName}}</div>
-                                        <div class="ps-2" style="border-left: 3px solid white;">{{ date('Y', strtotime($movies[0]->releaseDate))}}</div>
+                                        <div class="me-2">{{$movies[1]->genres->first()->genreName}}</div>
+                                        <div class="ps-2" style="border-left: 3px solid white;">{{ date('Y', strtotime($movies[1]->releaseDate))}}</div>
                                     </div>
-                                    <h1>{{$movies[0]->title}}</h1>
-                                    <div style="width: 50%; height: 100px; text-overflow: ellipsis; overflow: hidden; display: -webkit-box !important;-webkit-line-clamp:4; -webkit-box-orient: vertical; white-space: normal;">{{$movies[0]->description}}</div>
+                                    <h1>{{$movies[1]->title}}</h1>
+                                    <div style="width: 50%; height: 100px; text-overflow: ellipsis; overflow: hidden; display: -webkit-box !important;-webkit-line-clamp:4; -webkit-box-orient: vertical; white-space: normal;">{{$movies[1]->description}}</div>
                                 </div>
                             </div>
                         </div>
@@ -51,11 +51,11 @@
                             <div class="row d-flex justify-content-center">
                                 <div>
                                     <div class="d-flex align-items-center" style="margin-top: 10rem;">
-                                        <div class="me-2">{{$movies[0]->genres->first()->genreName}}</div>
-                                        <div class="ps-2" style="border-left: 3px solid white;">{{ date('Y', strtotime($movies[0]->releaseDate))}}</div>
+                                        <div class="me-2">{{$movies[2]->genres->first()->genreName}}</div>
+                                        <div class="ps-2" style="border-left: 3px solid white;">{{ date('Y', strtotime($movies[2]->releaseDate))}}</div>
                                     </div>
-                                    <h1>{{$movies[0]->title}}</h1>
-                                    <div style="width: 50%; height: 100px; text-overflow: ellipsis; overflow: hidden; display: -webkit-box !important;-webkit-line-clamp:4; -webkit-box-orient: vertical; white-space: normal;">{{$movies[0]->description}}</div>
+                                    <h1>{{$movies[2]->title}}</h1>
+                                    <div style="width: 50%; height: 100px; text-overflow: ellipsis; overflow: hidden; display: -webkit-box !important;-webkit-line-clamp:4; -webkit-box-orient: vertical; white-space: normal;">{{$movies[2]->description}}</div>
                                 </div>
                             </div>
                         </div>
@@ -72,13 +72,13 @@
                 <h3 class="text-white">Popular</h3>
             </div>
             @foreach($movies as $movie)
-            <a href="/movies/{{$movie->id}}" class="card p-2 m-2" style="width: 15rem; text-decoration:none;cursor: pointer; background-color: #121117;">
-                <img src="{{url('storage/'.$movie->thumbnail)}}" style="height: 18rem; object-fit: cover;" alt="">
-                <div class="card-body p-0">
-                    <div class="text-white" style="margin: 0.5rem 0 0.3rem 0;">{{$movie->title}}</div>
-                    <div class="" style="margin: 0rem 0 0.3rem 0; color: #4A4B50;">{{ date('Y', strtotime($movie->releaseDate))}}</div>
-                </div>
-            </a>
+                <a href="/movies/{{$movie->id}}" class="card p-2 m-2" style="width: 15rem; text-decoration:none;cursor: pointer; background-color: #121117;">
+                    <img src="{{url('storage/'.$movie->thumbnail)}}" style="height: 18rem; object-fit: cover;" alt="">
+                    <div class="card-body p-0">
+                        <div class="text-white" style="margin: 0.5rem 0 0.3rem 0;">{{$movie->title}}</div>
+                        <div class="" style="margin: 0rem 0 0.3rem 0; color: #4A4B50;">{{ date('Y', strtotime($movie->releaseDate))}}</div>
+                    </div>
+                </a>
             @endforeach
         </div>
         <!-- Searching -->
@@ -102,7 +102,7 @@
         <div class="row" style="padding: 1rem 0;">
             <div class="d-flex">
                 @foreach($genres as $genre)
-                <a href="{{ request()->fullUrlWithQuery(['genre' => $genre->genreName]) }}" class="card me-3 py-2 px-4 d-flex justify-content-center text-white" style="background-color: #2B2B2B; border-radius: 5px; text-decoration: none; cursor: pointer;" class="text-white">{{$genre->genreName}}</a>
+                    <a href="{{ request()->fullUrlWithQuery(['genre' => $genre->genreName]) }}" class="card me-3 py-2 px-4 d-flex justify-content-center text-white" style="background-color: #2B2B2B; border-radius: 5px; text-decoration: none; cursor: pointer;" class="text-white">{{$genre->genreName}}</a>
                 @endforeach
             </div>
         </div>
@@ -127,13 +127,13 @@
         <!-- List Movie -->
         <div class="row">
             @foreach($queriedMovies as $movie)
-            <a href="#" class="card p-2 m-2" style="width: 15rem; text-decoration:none;cursor: pointer; background-color: #121117;">
-                <img src="{{url('storage/'.$movie->thumbnail)}}" style="height: 18rem; object-fit: cover;" alt="">
-                <div class="card-body p-0">
-                    <div class="text-white" style="margin: 0.5rem 0 0.3rem 0;">{{$movie->title}}</div>
-                    <div class="" style="margin: 0rem 0 0.3rem 0; color: #4A4B50;">{{ date('Y', strtotime($movie->releaseDate))}}</div>
-                </div>
-            </a>
+                <a href="/movies/{{$movie->id}}" class="card p-2 m-2" style="width: 15rem; text-decoration:none;cursor: pointer; background-color: #121117;">
+                    <img src="{{url('storage/'.$movie->thumbnail)}}" style="height: 18rem; object-fit: cover;" alt="">
+                    <div class="card-body p-0">
+                        <div class="text-white" style="margin: 0.5rem 0 0.3rem 0;">{{$movie->title}}</div>
+                        <div class="" style="margin: 0rem 0 0.3rem 0; color: #4A4B50;">{{ date('Y', strtotime($movie->releaseDate))}}</div>
+                    </div>
+                </a>
             @endforeach
         </div>
 
@@ -174,7 +174,7 @@
         background-position-x: center;
         background-position-y: center;
         background-image:linear-gradient(rgba(0, 0, 0, 0.60), rgba(0, 0, 0, 0.60)),
-        url("{{url('storage/'.$movies[0]->thumbnail)}}");
+        url("{{url('storage/'.$movies[0]->background)}}");
         /* background-image:url({{url('images/php_mysql.jpg')}}) */
     }
 

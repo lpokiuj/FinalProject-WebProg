@@ -9,10 +9,17 @@
             <a href="/movies">Home</a>
             <a href="/movies">Movies</a>
             <a href="/actors">Actors</a>
+            <a href="#">Watchlist</a>
         </div>
         <div class="header-menu-2">
             <a class="header-menu-2-register" href="#">Register</a>
             <a class="header-menu-2-login" href="#">Login</a>
+            
+        </div>
+        <div class="profile">
+            <a href="#">
+                <img src="/assets/nav/user.svg" alt="">
+            </a>
         </div>
     </div>
 </header>
@@ -80,6 +87,11 @@
 
     .header-menu-2-login {
         color: #0B6BFD;
+    }
+    
+    .profile{
+        margin-left: 2rem;
+        filter: invert(100%) sepia(96%) saturate(14%) hue-rotate(235deg) brightness(104%) contrast(102%);
     }
 </style>
 @endsection

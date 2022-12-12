@@ -24,8 +24,8 @@
                 <label for="name">Name</label>
                 <input type="text" name="name" id="name">
                 <label for="gender">Gender</label>
-                <select class="form-select" name="genders" id="gender">
-                    <option selected="selected" value="">--Please Select Gender--</option>
+                <select class="form-select" name="gender" id="gender">
+                    <option selected="selected" value="">--Please Select --</option>
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
                 </select>
