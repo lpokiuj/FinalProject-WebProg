@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Actor;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\DB;
 use App\Models\Movie;
 use App\Models\GenreMovie;
 use App\Models\Character;
@@ -171,8 +171,6 @@ class MovieController extends Controller
             'charName.*' => ['required'],
             'director' => ['required', 'min: 3'],
             'releaseDate' => ['required', 'date'],
-            'thumbnail' => ['required', 'image'],
-            'background' => ['required', 'image']
         ]);
 
         $data = $request->except([
@@ -184,13 +182,15 @@ class MovieController extends Controller
         $actors = $request->actorID;
         $charNames = $request->charName;
 
-        Storage::delete([
-            $movie->thumbnail,
-            $movie->background
-        ]);
+        if($request->file('thumbnail')){
+            Storage::delete($movie->thumbnail);
+            $data['thumbnail'] = Storage::putFile('images/thumbnail', $request->file('thumbnail'));
+        }
 
-        $data['thumbnail'] = Storage::putFile('images/thumbnail', $request->file('thumbnail'));
-        $data['background'] = Storage::putFile('images/background', $request->file('background'));
+        if($request->file('background')){
+            Storage::delete($movie->background);
+            $data['background'] = Storage::putFile('images/background', $request->file('background'));
+        }
 
         $movie->update($data);
 
@@ -227,9 +227,11 @@ class MovieController extends Controller
             $movie->thumbnail,
             $movie->background
         ]);
-        Movie::destroy($movie->id);
 
-        return redirect('/movies');
+        DB::table('genre_movie')->where('movieID', $movie->id)->delete();
+        DB::table('characters')->where('movieID', $movie->id)->delete();
+
+        return Movie::destroy($movie->id);
     }
 
 }
