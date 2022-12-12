@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Actor;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\DB;
 use App\Models\Movie;
 use App\Models\GenreMovie;
 use App\Models\Character;
@@ -217,6 +217,10 @@ class MovieController extends Controller
             $movie->thumbnail,
             $movie->background
         ]);
+
+        DB::table('genre_movie')->where('movieID', $movie->id)->delete();
+        DB::table('characters')->where('movieID', $movie->id)->delete();
+
         return Movie::destroy($movie->id);
     }
 
