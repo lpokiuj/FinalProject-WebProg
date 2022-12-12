@@ -161,8 +161,6 @@ class MovieController extends Controller
             'charName.*' => ['required'],
             'director' => ['required', 'min: 3'],
             'releaseDate' => ['required', 'date'],
-            'thumbnail' => ['required', 'image'],
-            'background' => ['required', 'image']
         ]);
 
         $data = $request->except([
@@ -174,13 +172,15 @@ class MovieController extends Controller
         $actors = $request->actorID;
         $charNames = $request->charName;
 
-        Storage::delete([
-            $movie->thumbnail,
-            $movie->background
-        ]);
+        if($request->file('thumbnail')){
+            Storage::delete($movie->thumbnail);
+            $data['thumbnail'] = Storage::putFile('images/thumbnail', $request->file('thumbnail'));
+        }
 
-        $data['thumbnail'] = Storage::putFile('images/thumbnail', $request->file('thumbnail'));
-        $data['background'] = Storage::putFile('images/background', $request->file('background'));
+        if($request->file('background')){
+            Storage::delete($movie->background);
+            $data['background'] = Storage::putFile('images/background', $request->file('background'));
+        }
 
         $movie->update($data);
 
