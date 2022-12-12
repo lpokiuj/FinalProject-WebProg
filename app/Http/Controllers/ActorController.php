@@ -97,14 +97,15 @@ class ActorController extends Controller
             'biography' => ['required', 'min: 10'],
             'DOB' => ['required', 'date'],
             'POB' => ['required'],
-            'image' => ['required', 'image'],
             'popularity' => ['required', 'numeric']
         ]);
 
         $actor = Actor::find($id);
         $data = $request->all();
-        Storage::delete($actor->image);
-        $data['image'] = Storage::putFile('images/actor', $request->file('image'));
+        if($request->file('image')){
+            Storage::delete($actor->image);
+            $data['image'] = Storage::putFile('images/actor', $request->file('image'));
+        }
 
         $actor->update($data);
         return redirect('/actors/'.$id);
