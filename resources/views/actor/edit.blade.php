@@ -26,9 +26,9 @@
                 <input type="text" name="name" id="name" value="{{$actor->name}}">
                 <label for="gender">Gender</label>
                 <select class="form-select" name="gender" id="gender">
-                    <option selected="selected" value="">{{$actor->gender}}</option>
-                    <option value="1">Male</option>
-                    <option value="2">Female</option>
+                    <option selected="selected" value="{{$actor->gender}}">{{$actor->gender}}</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
                 </select>
                 <label for="biography">Biography</label>
                 <textarea type="text" style="height: 150px;" name="biography" id="">{{$actor->biography}}</textarea>

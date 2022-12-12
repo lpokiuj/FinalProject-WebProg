@@ -71,7 +71,7 @@
                 <img style="filter: invert(100%) sepia(98%) saturate(0%) hue-rotate(350deg) brightness(102%) contrast(103%); height: 2rem;" class="me-2" src="/assets/home/popular.svg" alt="">
                 <h3 class="text-white">Popular</h3>
             </div>
-            @foreach($movies as $movie)
+            @foreach($movies->slice(0,5)->all() as $movie)
                 <a href="/movies/{{$movie->id}}" class="card p-2 m-2" style="width: 15rem; text-decoration:none;cursor: pointer; background-color: #121117;">
                     <img src="{{url('storage/'.$movie->thumbnail)}}" style="height: 18rem; object-fit: cover;" alt="">
                     <div class="card-body p-0">
@@ -142,11 +142,6 @@
                 {{ $queriedMovies->links()}}
             </div>
         </div>
-        <!-- <div class="row">
-            <div class="d-flex justify-content-center" >
-                {{ $queriedMovies->links('movie.pagination')}}
-            </div>
-        </div> -->
     </div>
 </div>
 

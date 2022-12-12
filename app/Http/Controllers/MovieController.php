@@ -27,14 +27,14 @@ class MovieController extends Controller
         $movies = Movie::with([
             'genres',
             'actors'
-        ])->paginate(5);
+        ])->get();
 
         $queriedMovies = Movie::with([
             'genres',
             'actors'
         ])->withGenre($genreQuery)->withSort($sortQuery)->withSearch($searchQuery)->paginate(5)->withQueryString();
 
-        return view('movie.view', [
+        return view('movie.index', [
             'movies' => $movies,
             'queriedMovies' => $queriedMovies
         ]);
@@ -126,7 +126,7 @@ class MovieController extends Controller
 
         $moreMovies = Movie::paginate(5);
 
-        return view('movie.show', [
+        return view('movie.detail', [
             'movie' => $movie,
             'moreMovies' => $moreMovies
         ]);
@@ -212,7 +212,7 @@ class MovieController extends Controller
             ]);
         }
 
-        return redirect('/movies');
+        return redirect('/movies/'.$movie->id);
     }
 
     /**
@@ -231,7 +231,9 @@ class MovieController extends Controller
         DB::table('genre_movie')->where('movieID', $movie->id)->delete();
         DB::table('characters')->where('movieID', $movie->id)->delete();
 
-        return Movie::destroy($movie->id);
+        Movie::destroy($movie->id);
+
+        return redirect('/movies');
     }
 
 }
