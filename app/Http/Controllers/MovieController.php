@@ -34,7 +34,7 @@ class MovieController extends Controller
             'actors'
         ])->withGenre($genreQuery)->withSort($sortQuery)->withSearch($searchQuery)->paginate(5)->withQueryString();
 
-        return view('movie.view', [
+        return view('movie.index', [
             'movies' => $movies,
             'queriedMovies' => $queriedMovies
         ]);
@@ -106,7 +106,7 @@ class MovieController extends Controller
             ]);
         }
 
-        return $movie;
+        return redirect('/movies');
     }
 
     /**
@@ -122,9 +122,11 @@ class MovieController extends Controller
             'actors'
         ]);
 
+        // dd($movie);
+
         $moreMovies = Movie::paginate(5);
 
-        return view('movie.show', [
+        return view('movie.detail', [
             'movie' => $movie,
             'moreMovies' => $moreMovies
         ]);
@@ -139,6 +141,14 @@ class MovieController extends Controller
     public function edit($id)
     {
         //
+        $actors = Actor::all();
+        $genre = Genre::all();
+        $movie = Movie::find($id)->load([
+            'genres',
+            'actors'
+        ]);
+
+        return view('movie.edit', ['actors' => $actors, 'genres' => $genre, 'movie'=> $movie]);
     }
 
     /**
@@ -202,7 +212,7 @@ class MovieController extends Controller
             ]);
         }
 
-        return $movie;
+        return redirect('/movies/'.$movie->id);
     }
 
     /**
@@ -221,7 +231,9 @@ class MovieController extends Controller
         DB::table('genre_movie')->where('movieID', $movie->id)->delete();
         DB::table('characters')->where('movieID', $movie->id)->delete();
 
-        return Movie::destroy($movie->id);
+        Movie::destroy($movie->id);
+
+        return redirect('/movies');
     }
 
 }

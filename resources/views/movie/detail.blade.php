@@ -3,16 +3,46 @@
 @extends('main-structure.footer')
 
 @section('content')
+
+<style>
+    .heading{
+        background-repeat: no-repeat;
+            height: 700px;
+            background-size: cover;
+            object-fit: cover;
+            background-position-x: center;
+            background-position-y: center;
+            background-image:linear-gradient(rgba(0, 0, 0, 0.60), rgba(0, 0, 0, 0.60)), url("{{url('storage/'.$movie->background)}}");
+        }
+        .container{
+            color: white;
+        }
+        .sub{
+            margin-top: 0.5rem;
+            color: white;
+        }
+
+        button{
+            border: none;
+            background-color: red;
+        }
+</style>
 <div class="heading d-flex align-items-center">
     <div class="container">
+        
         <div class="row">
-            <button class="text-white d-flex justify-content-center py-2" style="background-color: red; margin-bottom: 0.5rem; border-style: none; border-radius: 5px;">Edit</button>
-            <button class="text-white d-flex justify-content-center py-2" style="background-color: red; margin-bottom: 1rem; border-style: none; border-radius: 5px;">Remove</button>
+            <a href="/movies/{{$movie->id}}/edit" class="text-white d-flex justify-content-center py-2" style="background-color: red; margin-bottom: 0.5rem; border-style: none; border-radius: 5px; text-decoration: none; ">Edit</a>
+            <form class="d-flex justify-content-center flex-column py-2" action="/movies/{{$movie->id}}" method="POST" enctype="multipart/form-data" style="background-color: red; margin-bottom: 1rem; border-style: none; border-radius: 5px; text-decoration: none; ">
+                @method('DELETE')
+                @csrf
+                <button class="text-white" type="submit">Remove</button>
+            </form>
         </div>
         <div class="row">
-            <div class="col-md-4 "><img style="height: 30rem;" src="{{url('storage/'.$movie->thumbnail)}}" alt="" srcset=""></div>
+            <div class="col-md-4 "><img style="height: 30rem; width: 20rem; object-fit: cover;" src="{{url('storage/'.$movie->thumbnail)}}" alt="" srcset=""></div>
             <div class="col-md-8">
                 <h1>{{$movie->title}}</h1>
+                
                 <div class="d-flex align-items-center">
                     @foreach($movie->genres as $genre)
                         <div class="border rounded-3 px-2 me-2" style="filter: brightness(70%);">{{$genre->genreName}}</div>
@@ -60,23 +90,4 @@
     </div>
 </div>
 
-<style>
-    .heading{
-        background-repeat: no-repeat;
-            height: 700px;
-            background-size: cover;
-            object-fit: cover;
-            background-position-x: center;
-            background-position-y: center;
-            background-image:linear-gradient(rgba(0, 0, 0, 0.60), rgba(0, 0, 0, 0.60)), url("{{url('storage/'.$movie->thumbnail)}}");
-            /* background-image:url({{url('images/php_mysql.jpg')}}) */
-        }
-        .container{
-            color: white;
-        }
-        .sub{
-            margin-top: 0.5rem;
-            color: white;
-        }
-</style>
 @endsection

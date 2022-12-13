@@ -25,55 +25,46 @@
                 <label for="description">Description</label>
                 <textarea type="text" style="height: 150px;" name="description" id="description"></textarea>
                 <label for="genre">Genre</label>
-                <select class="form-select" name="genres" id="genre">
-                    <option selected="selected" value="">--Please Select Genre--</option>
-                    @foreach($genres as $genre)
-                        <option value="{{$genre->id}}">{{$genre->genreName}}</option>
-                    @endforeach
-                </select>
+                <div id="genreInput">
+                    <select  class="form-select" name="genreID[]" id="genre">
+                        <option selected="selected" value="">--Please Select Genre--</option>
+                        @foreach($genres as $genre)
+                            <option value="{{$genre->id}}">{{$genre->genreName}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="row d-flex mt-2 ms-1">
+                    <button type="button" class="btn btn-primary" id="addMoreGenre">Add More</button>
+                </div>
+                
                 <div id="actorInput">
                     <div style="margin-bottom: 0rm;">Select Actor</div>
                     <div class="row ps-4">
                         <div class="col-md-6 d-flex flex-column">
                         <label for="actorName">Actor</label>
-                        <select class="form-select" name="actorNames" id="actorName">
+                        <select class="form-select" name="actorID[]" id="actorName">
                             <option selected="selected" value="">--Please Select Actor--</option>
                             @foreach($actors as $actor)
-                                <option value="{{$genre->id}}">{{$actor->name}}</option>
+                                <option value="{{$actor->id}}">{{$actor->name}}</option>
                             @endforeach
                         </select>
                         </div>
                         <div class="col-md-6 d-flex flex-column">
                             <label for="charName">Character Name</label>
-                            <input type="text" name="charName" id="charName">
-                        </div>
-                    </div>
-                    <div class="row ps-4">
-                        <div class="col-md-6 d-flex flex-column">
-                        <label for="actorName">Actor</label>
-                        <select class="form-select" name="actorNames" id="actorName">
-                            <option selected="selected" value="">--Please Select Actor--</option>
-                            @foreach($actors as $actor)
-                                <option value="{{$genre->id}}">{{$actor->name}}</option>
-                            @endforeach
-                        </select>
-                        </div>
-                        <div class="col-md-6 d-flex flex-column">
-                            <label for="charName">Character Name</label>
-                            <input type="text" name="charName" id="charName">
+                            <input type="text" name="charName[]" id="charName">
                         </div>
                     </div>
                 </div>
-                <div class="d-flex flex-row-reverse mt-2">
-                    <button type="button" class="btn btn-primary col-md-2" id="addMoreActors">Add More</button>
+                <div class="row d-flex mt-2" style="padding-left: 2.1rem;">
+                    <button type="button" class="btn btn-primary" id="addMoreActors">Add More</button>
                 </div>
                 
                 <label for="director">Director</label>
                 <input type="text" name="director" id="director">
                 <label for="releaseDate">Release Date</label>
                 <input type="date" name="releaseDate" id="releaseDate">
-                <label for="image">Image URL</label>
-                <input type="file" name="image" id="">
+                <label for="image">Thumbnail URL</label>
+                <input type="file" name="thumbnail" id="thumbnail">
                 <label for="background">Background URL</label>
                 <input type="file" name="background" id="background">
                 
@@ -112,44 +103,47 @@
     <script type="text/javascript">
         $(document).ready(function(){
             $('#addMoreActors').on('click',function(){
-                let html='';
-                html+='<div class="row ps-4">';
-                html+='<div class="col-md-6 d-flex flex-column">';
-                html+='<label for="actorName">Actor</label>';
-                html+='<select class="form-select" name="actorNames" id="actorName">';
-                html+='<option selected="selected" value="">--Please Select Actor--</option>';
-                html+='@foreach($actors as $actor)';
-                html+='<option value="{{$genre->id}}">{{$actor->name}}</option>';
-                html+='@endforeach';
-                html+='</select>';
-                html+='</div>';
-                html+='<div class="col-md-6 d-flex flex-column">';
-                html+='<label for="charName">Character Name</label>';
-                html+='<input type="text" name="charName" id="charName">';
-                html+='</div>';
-                html+='</div>';
-                $('#actorInput').append(html);
+                let line=`
+                <div class="row ps-4 d-flex align-items-end">
+                    <div class="col-md-5 d-flex flex-column">
+                        <label for="actorName">Actor</label>
+                        <select class="form-select" name="actorID[]" id="actorName">
+                            <option selected="selected" value="">--Please Select Actor--</option>
+                            @foreach($actors as $actor)
+                                <option value="{{$genre->id}}">{{$actor->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-md-5 d-flex flex-column">
+                        <label for="charName">Character Name</label>
+                        <input type="text" name="charName[]" id="charName">
+                    </div>
+                    <button type="button" style="height: 2.5rem; margin-bottom: 0.3rem;" class="deleteButton col-md-2 btn btn-primary" id="delete">Delete</button>
+                </div>
+                `;
+                
+                $('#actorInput').append(line);
+            })
+
+            $('#addMoreGenre').on('click',function(){
+                let line=`
+                <div class="row d-flex align-items-end justify-content-center">
+                    <div class="col-md-10">
+                        <select  class="form-select" name="genreID[]" id="genre">
+                            <option selected="selected" value="">--Please Select Genre--</option>
+                            @foreach($genres as $genre)
+                                <option value="{{$genre->id}}">{{$genre->genreName}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <button type="button" style="height: 2.5rem; margin-bottom: 0.3rem;" class="deleteButton col-md-2 btn btn-primary" id="delete">Delete</button>
+                </div>
+                `;
+                $('#genreInput').append(line);
             })
         })
-
-    // $(document).on('click', '.add_field', function() {
-    //     var html='';
-    //     html+='<div class="row ps-4">';
-    //     html+='<div class="col-md-6 d-flex flex-column">';
-    //     html+='<label for="actorName">Actor</label>';
-    //     html+='<select class="form-select" name="actorNames" id="actorName">';
-    //     html+='<option selected="selected" value="">--Please Select Actor--</option>';
-    //     html+='@foreach($actors as $actor)';
-    //     html+='<option value="{{$genre->id}}">{{$actor->name}}</option>';
-    //     html+='@endforeach';
-    //     html+='</select>';
-    //     html+='</div>';
-    //     html+='<div class="col-md-6 d-flex flex-column">';
-    //     html+='<label for="charName">Character Name</label>';
-    //     html+='<input type="text" name="charName" id="charName">';
-    //     html+='</div>';
-    //     html+='</div>';
-    //     $('tbody').append(html);                 
-    // })
+        $(document).on('click', '#delete', function(){
+            $(this).parent().remove();
+        })
     </script>
 @endsection

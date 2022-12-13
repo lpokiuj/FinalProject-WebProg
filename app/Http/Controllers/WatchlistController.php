@@ -16,7 +16,7 @@ class WatchlistController extends Controller
     {
         $user = $request->user();
         $watchlists = Watchlist::with('movie')->where('userID', $user->id)->get();
-        return $watchlists;
+        return view('movie.index', ['movie' => $watchlists]);
     }
 
     /**

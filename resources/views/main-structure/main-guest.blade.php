@@ -33,5 +33,11 @@
     .bg{
         background-color: #121117;
     }
+    .card{
+        border: none;
+    }
+    .card:hover{
+        border: 1px solid red;
+    }
 </style>
 </html>
