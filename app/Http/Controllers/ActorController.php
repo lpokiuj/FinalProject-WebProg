@@ -81,7 +81,7 @@ class ActorController extends Controller
     {
         //
         $actor = Actor::find($id)->load('movies');
-        
+
         return view('actor.edit', ['actor' => $actor]);
     }
 
@@ -124,6 +124,7 @@ class ActorController extends Controller
     {
         $actor = Actor::find($id);
         Storage::delete($actor->image);
+        Actor::destroy($id);
         return redirect('/actors');
     }
 }
