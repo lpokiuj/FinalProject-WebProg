@@ -124,6 +124,6 @@ class ActorController extends Controller
     {
         $actor = Actor::find($id);
         Storage::delete($actor->image);
-        return Actor::destroy($id);
+        return redirect('/actors');
     }
 }
