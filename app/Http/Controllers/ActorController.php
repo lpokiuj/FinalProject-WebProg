@@ -123,6 +123,9 @@ class ActorController extends Controller
     public function destroy($id)
     {
         $actor = Actor::find($id);
+        if($actor->movies()->count()){
+            return redirect('/actors/'.$id)->with('error', 'This character is playing in '.$actor->movies()->first()->title);
+        }
         Storage::delete($actor->image);
         Actor::destroy($id);
         return redirect('/actors');
