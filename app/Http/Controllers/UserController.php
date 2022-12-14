@@ -9,14 +9,19 @@ use Illuminate\Support\Facades\Cookie;
 
 class UserController extends Controller
 {
-
     public function register(Request $request)
     {
-        $data = $request->all();
-        $data['image'] = 'Default.png';
-        $data['password'] = bcrypt($data['password']);
-        return User::create($data);
+        $request->validate([
+            'username' => ['required', 'min:5', 'unique:users,username'],
+            'email' => ['required', 'email', 'unique:users,email'],
+            'password' => ['required', 'alpha_num', 'min:6', 'confirmed']
+        ]);
 
+        $data = $request->except('password_confirmation');
+        $data['image'] = '/images/user/Default.png';
+        $data['password'] = bcrypt($data['password']);
+        User::create($data);
+        return redirect('/login');
     }
 
     public function login(Request $request)
@@ -26,18 +31,28 @@ class UserController extends Controller
             'password' => 'required'
         ]);
 
-        if($request->remember){
-            Cookie::queue(Cookie::forever('mycookie', $request->email));
-        }
-        else{
-            Cookie::queue(Cookie::forget('mycookie'));
-        }
-
         if(Auth::attempt($creds)){
-            return 'Success';
+            if($request->remember){
+                Cookie::queue(Cookie::forever('mycookie', $request->email));
+            }
+            else{
+                Cookie::queue(Cookie::forget('mycookie'));
+            }
+
+            $request->session()->regenerate();
+            return redirect('/movies');
         }
 
-        return 'Invalid username/password! Please register if you don\'t have an account.';
+        return redirect('login')->with('error', 'Invalid username/password! Please register if you don\'t have an account.');
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/login');
     }
 
 }

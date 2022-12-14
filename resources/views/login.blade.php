@@ -17,28 +17,32 @@
                 </div>
             </div>
         </div>
+        @if(session()->has('error'))
+            <p>{{ session()->get('error') }}</p>
+        @endif
         <div class="filling">
-            <form action="">
+            <form action="/login" method="POST">
+                @csrf
                 <div class="login">
                     <label for="email" class="email">E-mail</label>
                     <input type="text" id="email" name="email" placeholder="Enter your email">
                 </div>
                 <div class="login">
                     <label class="email">Password</label>
-                    <input type="password" id="email" name="email" class="password" placeholder="Enter your password">
+                    <input type="password" id="email" name="password" class="password" placeholder="Enter your password">
                 </div>
                 <div class="remember-me">
-                    <input type="checkbox" id="remember-me" name="remember-me" value=true>
+                    <input type="checkbox" id="remember-me" name="remember" value=true>
                     <label>Remember me</label>
                 </div>
-                <a href="#" class="login-button">
+                <button type="submit" class="login-button">
                     <label>Login</label>
                     <img src="/assets/login/Arrow Right.svg" alt="" srcset="">
-                </a>
+                </button>
             </form>
             <div class="dont-have-account">
                 <label>Don't have an account?</label>
-                <a href="#">Register Now!</a>
+                <a href="/register">Register Now!</a>
             </div>
         </div>
     </div>

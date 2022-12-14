@@ -17,12 +17,24 @@ use App\Http\Controllers\WatchlistController;
 |
 */
 
-Route::resource('actors', ActorController::class);
-Route::resource('movies', MovieController::class);
-Route::resource('watchlists', WatchlistController::class);
+Route::group(['middleware' => ['isAdmin']], function(){
+    Route::resource('actors', ActorController::class);
+    Route::resource('movies', MovieController::class);
+    Route::resource('watchlists', WatchlistController::class);
+});
 
-Route::post('/register', [UserController::class, 'register']);
-Route::post('/login', [UserController::class, 'login']);
+Route::resource('actors', ActorController::class)->only([
+    'index',
+    'show'
+]);
+Route::resource('movies', MovieController::class)->only([
+    'index',
+    'show'
+]);
+Route::resource('watchlists', WatchlistController::class)->only([
+    'index',
+    'show'
+]);
 
 Route::get('/', function () {
     return redirect('/movies');
@@ -30,8 +42,12 @@ Route::get('/', function () {
 
 Route::get('/login', function(){
     return view('login');
-});
+})->middleware('guest');
+Route::post('/login', [UserController::class, 'login'])->middleware('guest');
 
 Route::get('/register', function(){
     return view('register');
-});
+})->middleware('guest');
+Route::post('/register', [UserController::class, 'register'])->middleware('guest');
+
+Route::post('/logout', [UserController::class, 'logout']);

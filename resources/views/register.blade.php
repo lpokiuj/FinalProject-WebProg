@@ -18,14 +18,15 @@
             </div>
         </div>
         <div class="filling">
-            <form action="">
+            <form action="/register" method="POST">
+                @csrf
                 <div class="login">
                     <label for="username">Username</label>
-                    <input type="text" id="username" placeholder="Enter your username">
+                    <input type="text" id="username" name="username" placeholder="Enter your username">
                 </div>
                 <div class="login">
                     <label class="email">E-mail</label>
-                    <input type="password" id="email" name="email" placeholder="Enter your e-mail">
+                    <input type="text" id="email" name="email" placeholder="Enter your e-mail">
                 </div>
                 <div class="login">
                     <label class="password">Password</label>
@@ -33,16 +34,24 @@
                 </div>
                 <div class="login">
                     <label class="confirm-password">Confirm Password</label>
-                    <input type="password" id="email" name="confirm-password" placeholder="Confirm your password">
+                    <input type="password" id="email" name="password_confirmation" placeholder="Confirm your password">
                 </div>
-                <a href="#" class="login-button">
+                <button type="submit" class="login-button">
                     <label>register</label>
                     <img src="/assets/login/Arrow Right.svg" alt="" srcset="">
-                </a>
+                </button>
             </form>
+            @if ($errors->any())
+                <h4>Error</h4>
+                <ul class="ps-5">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            @endif
             <div class="dont-have-account">
                 <label>Already have an account?</label>
-                <a href="#">Login now!</a>
+                <a href="/login">Login now!</a>
             </div>
         </div>
     </div>
