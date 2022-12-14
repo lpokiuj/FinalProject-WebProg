@@ -20,6 +20,9 @@ use App\Http\Controllers\WatchlistController;
 Route::group(['middleware' => ['isAdmin']], function(){
     Route::resource('actors', ActorController::class);
     Route::resource('movies', MovieController::class);
+});
+
+Route::group(['middleware' => ['auth']], function(){
     Route::resource('watchlists', WatchlistController::class);
 });
 
@@ -28,10 +31,6 @@ Route::resource('actors', ActorController::class)->only([
     'show'
 ]);
 Route::resource('movies', MovieController::class)->only([
-    'index',
-    'show'
-]);
-Route::resource('watchlists', WatchlistController::class)->only([
     'index',
     'show'
 ]);
