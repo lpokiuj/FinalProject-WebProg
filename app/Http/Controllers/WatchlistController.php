@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Watchlist;
 
 class WatchlistController extends Controller
@@ -37,11 +38,12 @@ class WatchlistController extends Controller
      */
     public function store(Request $request)
     {
-        $watchlist = new Watchlist;
-        $watchlist['movieID'] = $request['movieID'];
-        $watchlist['userID'] = $request['userID'];
+        Watchlist::create([
+            'userID' => Auth::id(),
+            'movieID' => $request->movieID,
+        ]);
 
-        return $watchlist->save();
+        return redirect('/movies');
     }
 
     /**
@@ -75,12 +77,11 @@ class WatchlistController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $watchlist = Watchlist::find($id);
+        $watchlist = Watchlist::where('userID', Auth::id())->where('movieID', $id)->first();
         $data = $request->all();
 
         $watchlist->update($data);
-        return $watchlist;
-
+        return redirect('/movies');
     }
 
     /**
@@ -91,6 +92,7 @@ class WatchlistController extends Controller
      */
     public function destroy($id)
     {
-        return Watchlist::destroy($id);
+        $watchlist = Watchlist::where('userID', Auth::id())->where('movieID', $id)->first();
+        return Watchlist::destroy($watchlist->id);
     }
 }

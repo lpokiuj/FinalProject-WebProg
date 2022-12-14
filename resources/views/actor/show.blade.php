@@ -42,9 +42,14 @@
                         </a>
                     @endforeach
                 </div>
-                
+
             </div>
         </div>
+
+        @if(session()->has('error'))
+            <p>{{ session()->get('error') }}</p>
+        @endif
+
     </div>
     <style>
         .sub-desc{
