@@ -24,6 +24,7 @@ Route::group(['middleware' => ['isAdmin']], function(){
 
 Route::group(['middleware' => ['auth']], function(){
     Route::resource('watchlists', WatchlistController::class);
+    Route::get('/profile', [UserController::class, 'show']);
 });
 
 Route::resource('actors', ActorController::class)->only([
