@@ -99,6 +99,14 @@
         label{
             margin-top: 0.5rem;
         }
+
+        .profile{
+            background-color: transparent;
+        }
+
+        .profile:hover, .profile:active{
+            background-color: transparent;
+        }
     </style>
     <script type="text/javascript">
         $(document).ready(function(){

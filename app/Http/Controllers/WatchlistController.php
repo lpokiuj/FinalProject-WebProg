@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Watchlist;
+// Buat Dummy (bawah)
+use App\Models\User;
+// end
 
 class WatchlistController extends Controller
 {
@@ -16,8 +19,11 @@ class WatchlistController extends Controller
     public function index(Request $request)
     {
         $user = $request->user();
+
         $watchlists = Watchlist::with('movie')->where('userID', $user->id)->get();
-        return view('movie.index', ['movie' => $watchlists]);
+        // dd($watchlists[0]->movie->title);
+        $allWatchlist = Watchlist::all();
+        return view('watchlist.index', ['watchlists' => $watchlists, 'allWatchlist' => $allWatchlist]);
     }
 
     /**
@@ -79,9 +85,13 @@ class WatchlistController extends Controller
     {
         $watchlist = Watchlist::where('userID', Auth::id())->where('movieID', $id)->first();
         $data = $request->all();
-
+        // dd($request->status);
+        if($data['status'] == 'Remove'){
+            $watchlist->delete();
+            return redirect('/watchlists');
+        }
         $watchlist->update($data);
-        return redirect('/movies');
+        return redirect('/watchlists');
     }
 
     /**
@@ -93,6 +103,6 @@ class WatchlistController extends Controller
     public function destroy($id)
     {
         $watchlist = Watchlist::where('userID', Auth::id())->where('movieID', $id)->first();
-        return Watchlist::destroy($watchlist->id);
+        return redirect('/watchlists');
     }
 }

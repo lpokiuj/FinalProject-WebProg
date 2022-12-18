@@ -5,7 +5,7 @@
 @section('title', 'login')
 
 @section('content')
-    <div class="body">
+    <div class="body" style="min-height: 800px;">
         <div class="body-headlines">
             <div class="body-headlines-1">
                 Hello, Welcome back to
@@ -17,11 +17,20 @@
                 </div>
             </div>
         </div>
-        @if(session()->has('error'))
-            <p>{{ session()->get('error') }}</p>
-        @endif
         <div class="filling">
-            <form action="/login" method="POST">
+            <div class="text-danger d-flex justify-content-center">
+            @if(session()->has('error'))
+                <p>{{ session()->get('error') }}</p>
+            @endif
+            @if ($errors->any())
+            <ul class="ps-5">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+            @endif 
+            </div>
+            <form action="/login" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="login">
                     <label for="email" class="email">E-mail</label>
@@ -90,7 +99,7 @@
             font-family: sans-serif;
         }
 
-        .login input {
+        .login input{
             text-decoration: none;
             font-size: large;
             background-color: #1F1F1F;
@@ -114,14 +123,14 @@
             margin-left: 0.5rem;
         }
 
-        .login-button {
+        .login-button{
             display: flex;
             align-items: center;
             justify-content: center;
             background-color: #E50913;
             margin-top: 1rem;
-            border-radius: 5px;
-            padding: 0.5rem 0;
+            border-radius: 10px;
+            padding: 1rem 17rem;
             text-decoration: none;
         }
 

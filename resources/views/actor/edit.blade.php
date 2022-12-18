@@ -4,7 +4,6 @@
 
 @section('content')
     <div class="container">
-        
         <div class="row">
             <h1 class="text-white my-5">Edit Actor</h1>
         </div>

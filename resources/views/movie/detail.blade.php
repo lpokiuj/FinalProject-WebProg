@@ -29,15 +29,20 @@
 </style>
 <div class="heading d-flex align-items-center">
     <div class="container">
+        @guest
+        @else
+            @if(auth()->user()->isAdmin)
+            <div class="row">
+                <a href="/movies/{{$movie->id}}/edit" class="text-white d-flex justify-content-center py-2" style="background-color: red; margin-bottom: 0.5rem; border-style: none; border-radius: 5px; text-decoration: none; ">Edit</a>
+                <form class="d-flex justify-content-center flex-column py-2" action="/movies/{{$movie->id}}" method="POST" enctype="multipart/form-data" style="background-color: red; margin-bottom: 1rem; border-style: none; border-radius: 5px; text-decoration: none; ">
+                    @method('DELETE')
+                    @csrf
+                    <button class="text-white" type="submit">Remove</button>
+                </form>
+            </div>
+            @endif
+        @endguest        
         
-        <div class="row">
-            <a href="/movies/{{$movie->id}}/edit" class="text-white d-flex justify-content-center py-2" style="background-color: red; margin-bottom: 0.5rem; border-style: none; border-radius: 5px; text-decoration: none; ">Edit</a>
-            <form class="d-flex justify-content-center flex-column py-2" action="/movies/{{$movie->id}}" method="POST" enctype="multipart/form-data" style="background-color: red; margin-bottom: 1rem; border-style: none; border-radius: 5px; text-decoration: none; ">
-                @method('DELETE')
-                @csrf
-                <button class="text-white" type="submit">Remove</button>
-            </form>
-        </div>
         <div class="row">
             <div class="col-md-4 "><img style="height: 30rem; width: 20rem; object-fit: cover;" src="{{url('storage/'.$movie->thumbnail)}}" alt="" srcset=""></div>
             <div class="col-md-8">
@@ -79,13 +84,48 @@
     </div>
     <div class="row">
         @foreach($moreMovies as $movie)
-            <a href="/movies/{{$movie->id}}" class="card p-2 m-2" style="width: 15rem; text-decoration:none;cursor: pointer; background-color: #121117;">
-                <img src="{{url('storage/'.$movie->thumbnail)}}" style="height: 18rem; object-fit: cover;" alt="">
-                <div class="card-body p-0">
-                    <div class="text-white" style="margin: 0.5rem 0 0.3rem 0;">{{$movie->title}}</div>
-                    <div class="" style="margin: 0rem 0 0.3rem 0; color: #4A4B50;">{{ date('Y', strtotime($movie->releaseDate))}}</div>
+        <div  class="card p-2 m-2" style="width: 15rem; text-decoration:none;cursor: pointer; background-color: #121117;">
+                    <a href="/movies/{{$movie->id}}" style="height: 20rem;">
+                        <img src="{{url('storage/'.$movie->thumbnail)}}" style="object-fit: cover; height: 19.5rem;" alt="">
+                    </a>
+                    <div class="card-body p-0">
+                        <div class="text-white" style="margin: 0.5rem 0 0.3rem 0;">{{$movie->title}}</div>
+                        <div class="d-flex justify-content-between justify-content-center">
+                            <div class="" style="margin: 0rem 0 0.3rem 0; color: #4A4B50;">{{ date('Y', strtotime($movie->releaseDate))}}</div>
+                            <!-- UNDER CONSTRUCTION -->
+                            @guest
+                            @else
+                                @if(auth()->user()->isAdmin)
+                                @else
+                                @php
+                                    $flag = 0;
+                                @endphp
+                                @foreach($movie->users as $user)
+                                    @if($user->id == auth()->id())
+                                        @php
+                                            $flag = 1;
+                                        @endphp
+                                    @endif
+                                @endforeach
+                                @if($flag == 1)
+                                    <div>
+                                        <img src="/assets/check-mark.svg" alt="" style="filter: invert(10%) sepia(80%) saturate(5737%) hue-rotate(8deg) brightness(93%) contrast(119%);">
+                                    </div>
+                                    @else
+                                    <form action="/watchlists" method="POST" enctype="multipart/form-data">
+                                        @csrf
+                                        <input type="hidden" name="movieID" value="{{$movie->id}}">
+                                        <button type="submit" style="border: none; background-color: #121117;">
+                                            <img src="/assets/home/plus.svg" style="filter: invert(80%) sepia(36%) saturate(6560%) hue-rotate(62deg) brightness(109%) contrast(126%); height: 15px;" alt="">
+                                        </button>
+                                     </form>
+                                @endif
+                                @endif
+                            @endguest
+                            <!--END UNDER CONSTRUCTION -->
+                        </div>
+                    </div>
                 </div>
-            </a>
         @endforeach
     </div>
 </div>

@@ -18,20 +18,22 @@ use App\Http\Controllers\WatchlistController;
 */
 
 Route::group(['middleware' => ['isAdmin']], function(){
-    Route::resource('actors', ActorController::class);
-    Route::resource('movies', MovieController::class);
+    Route::resource('/actors', ActorController::class);
+    Route::resource('/movies', MovieController::class);
 });
 
 Route::group(['middleware' => ['auth']], function(){
-    Route::resource('watchlists', WatchlistController::class);
+    Route::resource('/watchlists', WatchlistController::class);
+    Route::get('/profile/update', [UserController::class,'edit']);
+    Route::put('/profile', [UserController::class,'update']);
     Route::get('/profile', [UserController::class, 'show']);
 });
 
-Route::resource('actors', ActorController::class)->only([
+Route::resource('/actors', ActorController::class)->only([
     'index',
     'show'
 ]);
-Route::resource('movies', MovieController::class)->only([
+Route::resource('/movies', MovieController::class)->only([
     'index',
     'show'
 ]);
