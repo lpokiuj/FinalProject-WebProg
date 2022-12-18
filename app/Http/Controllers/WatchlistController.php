@@ -15,8 +15,10 @@ class WatchlistController extends Controller
      */
     public function index(Request $request)
     {
+        $statusQuery = $request->query('status', '');
+
         $user = $request->user();
-        $watchlists = Watchlist::with('movie')->where('userID', $user->id)->get();
+        $watchlists = Watchlist::with('movie')->where('userID', $user->id)->withStatus($statusQuery)->get();
         return view('movie.index', ['movie' => $watchlists]);
     }
 
