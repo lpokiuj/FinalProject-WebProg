@@ -19,8 +19,8 @@ class UserSeeder extends Seeder
             [
                 'username' => 'emmanuel',
                 'email' => 'oki@binus.ac.id',
-                'password' => '12345',
-                'isAdmin' => 0,
+                'password' => bcrypt('password'),
+                'isAdmin' => false,
                 'image' => 'test',
             ],
         ]);

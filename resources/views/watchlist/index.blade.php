@@ -33,15 +33,28 @@
         </form>
     </div>
     <div class="row mt-4">
-        <form action="/watchlists">
-            <img src="/assets/watchlist/filter.svg" alt="" style="filter: invert(100%) sepia(93%) saturate(0%) hue-rotate(48deg) brightness(103%) contrast(104%);">
+        
+        <div class="dropdown">
+            <img src="/assets/watchlist/filter.svg" alt="" style="filter: invert(100%) sepia(93%) saturate(0%) hue-rotate(48deg) brightness(103%) contrast(104%); height: 20px;">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Sort by
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['status' => 'All']) }}">All</a></li>
+                <li><a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['status' => 'Planned']) }}">Planned</a></li>
+                <li><a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['status' => 'Watching']) }}">Watching</a></li>
+                <li><a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['status' => 'Finished']) }}">Finished</a></li>
+            </ul>
+        </div>
+        <!-- <form action="/watchlists">
+            
             <select name="status" class="text-white p-1 ms-2" style="background-color: #121117; border: none; cursor: pointer;">
-                <option value="All" selected>All</option>
-                <option value="Planned">Planned</option>
-                <option value="Watching">Watching</option>
-                <option value="Finished">Finished</option>
+                <option value="All" selected><a href="">All</a></option>
+                <option value="Planned"><a href="">Planned</a></option>
+                <option value="Watching"><a href="">Watching</a></option>
+                <option value="Finished"><a href="{{ request()->fullUrlWithQuery(['sort' => 'Finished']) }}"></a> Finished</option>
             </select>
-        </form>
+        </form> -->
     </div>
     <div class="row mt-4 text-white" style="filter: brightness(50%);">
         <h4 class="col-md-3">Poster</h4>

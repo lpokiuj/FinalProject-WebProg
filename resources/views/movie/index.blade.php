@@ -40,9 +40,16 @@
                                             @endif
                                         @endforeach
                                         @if($flag == 1)
-                                            <div class="col-md-1 d-flex justify-content-center align-items-center mt-2" style="background-color: red; height: 2rem; width: 10rem; filter: brightness(50%);">
-                                                <div>Aready Added</div>
-                                            </div>
+                                            <form action="/watchlists/{{$movies[0]->id}}" method="POST" enctype="multipart/form-data">
+                                                @method('DELETE')
+                                                @csrf
+                                                <input type="hidden" name="movieID" value="{{$movies[0]->id}}">
+                                                <button type="submit" style="border: none; background-color: #121117;">
+                                                    <div class="col-md-1 d-flex justify-content-center align-items-center mt-2" style="background-color: red; height: 2rem; width: 10rem; filter: brightness(50%);">
+                                                        <div>Aready Added</div>
+                                                    </div>
+                                                </button>
+                                            </form>
                                             @else
                                             <form action="/watchlists" method="POST" enctype="multipart/form-data">
                                                 @csrf
@@ -89,9 +96,16 @@
                                             @endif
                                         @endforeach
                                         @if($flag == 1)
-                                            <div class="col-md-1 d-flex justify-content-center align-items-center mt-2" style="background-color: red; height: 2rem; width: 10rem; filter: brightness(50%);">
-                                                <div>Aready Added</div>
-                                            </div>
+                                            <form action="/watchlists/{{$movies[1]->id}}" method="POST" enctype="multipart/form-data">
+                                                @method('DELETE')
+                                                @csrf
+                                                <input type="hidden" name="movieID" value="{{$movies[1]->id}}">
+                                                <button type="submit" style="border: none; background-color: #121117;">
+                                                    <div class="col-md-1 d-flex justify-content-center align-items-center mt-2" style="background-color: red; height: 2rem; width: 10rem; filter: brightness(50%);">
+                                                        <div>Aready Added</div>
+                                                    </div>
+                                                </button>
+                                            </form>
                                             @else
                                             <form action="/watchlists" method="POST" enctype="multipart/form-data">
                                                 @csrf
@@ -138,9 +152,16 @@
                                             @endif
                                         @endforeach
                                         @if($flag == 1)
-                                            <div class="col-md-1 d-flex justify-content-center align-items-center mt-2" style="background-color: red; height: 2rem; width: 10rem; filter: brightness(50%);">
-                                                <div>Aready Added</div>
-                                            </div>
+                                            <form action="/watchlists/{{$movies[2]->id}}" method="POST" enctype="multipart/form-data">
+                                                @method('DELETE')
+                                                @csrf
+                                                <input type="hidden" name="movieID" value="{{$movies[2]->id}}">
+                                                <button type="submit" style="border: none; background-color: #121117;">
+                                                    <div class="col-md-1 d-flex justify-content-center align-items-center mt-2" style="background-color: red; height: 2rem; width: 10rem; filter: brightness(50%);">
+                                                        <div>Aready Added</div>
+                                                    </div>
+                                                </button>
+                                            </form>
                                             @else
                                             <form action="/watchlists" method="POST" enctype="multipart/form-data">
                                                 @csrf
@@ -194,9 +215,14 @@
                                     @endif
                                 @endforeach
                                 @if($flag == 1)
-                                    <div>
-                                        <img src="/assets/check-mark.svg" alt="" style="filter: invert(10%) sepia(80%) saturate(5737%) hue-rotate(8deg) brightness(93%) contrast(119%);">
-                                    </div>
+                                    <form action="/watchlists/{{$movie->id}}" method="POST" enctype="multipart/form-data">
+                                        @method('DELETE')
+                                        @csrf
+                                        <input type="hidden" name="movieID" value="{{$movie->id}}">
+                                        <button type="submit" style="border: none; background-color: #121117;">
+                                            <img src="/assets/check-mark.svg" alt="" style="filter: invert(10%) sepia(80%) saturate(5737%) hue-rotate(8deg) brightness(93%) contrast(119%);">
+                                        </button>
+                                     </form>
                                     @else
                                     <form action="/watchlists" method="POST" enctype="multipart/form-data">
                                         @csrf
@@ -286,9 +312,14 @@
                                     @endif
                                 @endforeach
                                 @if($flag == 1)
-                                    <div>
-                                        <img src="/assets/check-mark.svg" alt="" style="filter: invert(10%) sepia(80%) saturate(5737%) hue-rotate(8deg) brightness(93%) contrast(119%);">
-                                    </div>
+                                    <form action="/watchlists/{{$movie->id}}" method="POST" enctype="multipart/form-data">
+                                        @method('DELETE')
+                                        @csrf
+                                        <input type="hidden" name="movieID" value="{{$movie->id}}">
+                                        <button type="submit" style="border: none; background-color: #121117;">
+                                            <img src="/assets/check-mark.svg" alt="" style="filter: invert(10%) sepia(80%) saturate(5737%) hue-rotate(8deg) brightness(93%) contrast(119%);">
+                                        </button>
+                                     </form>
                                     @else
                                     <form action="/watchlists" method="POST" enctype="multipart/form-data">
                                         @csrf
