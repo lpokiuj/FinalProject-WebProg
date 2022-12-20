@@ -21,7 +21,7 @@
             @else
                 <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle profile" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="/assets/nav/user.svg" alt="">
+                        <img src="{{auth()->user()->image}}" alt="" style="border-radius: 100rem; height: 30px;">
                     </button>
                     <ul class="dropdown-menu ">
                         <li class="dropdown-item d-flex justify-content-center">
@@ -97,7 +97,6 @@
 
     .profile {
         margin-left: 2rem;
-        filter: invert(100%) sepia(96%) saturate(14%) hue-rotate(235deg) brightness(104%) contrast(102%);
     }
 
     .dropdown-menu{

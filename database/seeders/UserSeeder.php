@@ -21,7 +21,6 @@ class UserSeeder extends Seeder
                 'email' => 'oki@binus.ac.id',
                 'password' => bcrypt('password'),
                 'isAdmin' => false,
-                'image' => 'test',
             ],
         ]);
     }

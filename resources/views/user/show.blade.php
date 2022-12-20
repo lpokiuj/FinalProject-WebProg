@@ -57,7 +57,7 @@
         <div class="row">
             <div class="col-md-3 d-flex flex-column justify-content-center align-items-center" style="margin-right: 2rem;">
                 <h2 class="text-white">My Profile</h2>
-                <img src="{{url('storage/'.$user->profile)}}" alt="" style="height: 200px;">
+                <img src="{{$user->image}}" alt="" style="height: 200px; border-radius: 100rem;">
                 <div class="text-white">{{$user->username}}</div>
                 <div class="text-white">{{$user->email}}</div>
             </div>

@@ -36,7 +36,7 @@ class MovieController extends Controller
         
         return view('movie.index', [
             'movies' => $movies,
-            'queriedMovies' => $queriedMovies
+            'queriedMovies' => $queriedMovies,
         ]);
     }
 
