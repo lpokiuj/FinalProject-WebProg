@@ -51,18 +51,37 @@
         .login-button img {
             filter: invert(100%) sepia(93%) saturate(27%) hue-rotate(233deg) brightness(107%) contrast(100%);
         }
+
+        .modal-content{
+        background-color: #2B2B2B;
+        }
+
+        .modal-header{
+            border-bottom: none;
+        }
+
+        .modal-footer{
+            border-top: none;
+        }
+
+        .save{
+            background-color: red;
+        }
     </style>
     <div class="container d-flex justify-content-center align-items-center" style="min-height: 800px;">
         <div class="row">
             <div class="col-md-3 d-flex flex-column justify-content-center align-items-center" style="margin-right: 2rem;">
                 <h2 class="text-white">My Profile</h2>
-                <img src="{{url('storage/'.$user->profile)}}" alt="" style="height: 200px;">
+                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <img src="{{$user->image}}" alt="" style="height: 200px; border-radius: 100rem;">
+                </button>
+                
                 <div class="text-white">{{$user->username}}</div>
                 <div class="text-white">{{$user->email}}</div>
             </div>
             <div class="col-md-8"na>
                 <h1 class="text-danger">Update Profile</h1>
-                <form action="/profile" method="POST" enctype="multipart/form-data">
+                <form action="/profile" method="POST" id="updateProfile" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="login">
@@ -83,6 +102,23 @@
                     </div>
                     <button type="submit" class="login-button text-white">Update</button>
                 </form>
+            </div>
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">Update Image</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <input form="updateProfile" value="{{$user->image}}" placeholder="{{$user->image}}" type="text" name="image" style="width: 29rem;">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-danger save" data-bs-dismiss="modal">Save Image</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
