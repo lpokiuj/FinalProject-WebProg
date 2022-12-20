@@ -15,11 +15,11 @@ class WatchlistController extends Controller
      */
     public function index(Request $request)
     {
-        $statusQuery = $request->query('status', '');
-
         $user = $request->user();
+        $statusQuery = $request->query('status', '');
         $watchlists = Watchlist::with('movie')->where('userID', $user->id)->withStatus($statusQuery)->get();
-        return view('movie.index', ['movie' => $watchlists]);
+
+        return view('watchlist.index', ['watchlists' => $watchlists]);
     }
 
     /**
@@ -95,6 +95,7 @@ class WatchlistController extends Controller
     public function destroy($id)
     {
         $watchlist = Watchlist::where('userID', Auth::id())->where('movieID', $id)->first();
-        return Watchlist::destroy($watchlist->id);
+        Watchlist::destroy($watchlist->id);
+        return redirect('/watchlists');
     }
 }
