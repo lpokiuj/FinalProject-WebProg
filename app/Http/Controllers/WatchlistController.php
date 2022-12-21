@@ -18,7 +18,7 @@ class WatchlistController extends Controller
         $user = $request->user();
         $statusQuery = $request->query('status', '');
         $searchQuery = $request->query('search', '');
-        $watchlists = Watchlist::with('movie')->where('userID', $user->id)->withStatus($statusQuery)->withSearch($searchQuery)->paginate(5)->withQueryString();
+        $watchlists = Watchlist::with('movie')->where('userID', $user->id)->withStatus($statusQuery)->withsearch($searchQuery)->paginate(5);
 
         return view('watchlist.index', ['watchlists' => $watchlists]);
     }

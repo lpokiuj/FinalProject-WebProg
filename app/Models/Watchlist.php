@@ -33,7 +33,9 @@ class Watchlist extends Model
     public function scopeWithSearch(Builder $query, $search)
     {
         if(!is_null($search)){
-            return $query->where('title', 'LIKE', '%'.$search.'%');
+            return $query->whereHas('movie', function($q) use($search){
+                $q->where('title', 'LIKE', '%'.$search.'%');
+            });
         }
 
         return $query;

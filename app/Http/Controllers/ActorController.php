@@ -19,7 +19,7 @@ class ActorController extends Controller
     public function index(Request $request)
     {
         $searchQuery = $request->query('search', '');
-        $actors = Actor::all()->withSearch($searchQuery)->paginate(5)->withQueryString();
+        $actors = Actor::withSearch($searchQuery)->paginate(5)->withQueryString();
 
         return view('actor.index', ['actors' => $actors]);
     }
