@@ -168,7 +168,7 @@
                                                 <input type="hidden" name="movieID" value="{{$movies[2]->id}}">
                                                 <button type="submit" style="border: none; background-color: transparent;">
                                                     <div class="col-md-1 d-flex justify-content-center align-items-center mt-2 text-white" style="background-color: #AE0000; height: 2rem; width: 10rem;">
-                                                        <div>Add to Wathclist</div>
+                                                        <div>Add to Watchlist</div>
                                                     </div>
                                                 </button>
                                             </form>
@@ -369,7 +369,7 @@
         object-fit: cover;
         background-position-x: center;
         background-position-y: center;
-        
+
         /* background-image:url({{url('images/php_mysql.jpg')}}) */
     }
 
@@ -392,7 +392,7 @@
         background-color: red;
     }
 
-    
+
 
 </style>
 @endsection
