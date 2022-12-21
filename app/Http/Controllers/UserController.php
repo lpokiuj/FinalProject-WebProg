@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Cookie;
 
 class UserController extends Controller
 {
+    
     public function register(Request $request)
     {
         $request->validate([
@@ -50,6 +51,7 @@ class UserController extends Controller
     {
         Auth::logout();
         $request->session()->invalidate();
+        
         $request->session()->regenerateToken();
 
         return redirect('/login');
@@ -58,12 +60,13 @@ class UserController extends Controller
     public function show()
     {
         $user = User::find(Auth::id());
-        return $user;
+        return view('user.show', ['user' => $user]);
     }
 
     public function edit()
     {
-
+        $user = User::find(Auth::id());
+        return view('user.edit', ['user' => $user]);
     }
 
     public function update(Request $request)
@@ -71,15 +74,14 @@ class UserController extends Controller
         $request->validate([
             'username' => ['required', 'min:5'],
             'email' => ['required', 'email'],
-            'password' => ['required', 'alpha_num', 'min:6', 'confirmed'],
             'DOB' => ['required', 'date'],
-            'phone' => ['requiired', 'min:5', 'max:13']
+            'phone' => ['required', 'min:5', 'max:13']
         ]);
 
         $user = User::find(Auth::id());
         $data = $request->all();
         $user->update($data);
-        return redirect('/movies');
+        return redirect('/profile');
     }
 
 }

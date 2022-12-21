@@ -23,8 +23,8 @@ class Watchlist extends Model
 
     public function scopeWithStatus(Builder $query, $status)
     {
-        if(!is_null($status)){
-            return $query->whereRelation('watchlists', 'status', 'LIKE', '%'.$status.'%');
+        if(!is_null($status)&&$status!='All'){
+            return $query->where('status', 'LIKE', '%'.$status.'%');
         }
 
         return $query;

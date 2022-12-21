@@ -18,6 +18,17 @@
             </div>
         </div>
         <div class="filling">
+            <div class="text-danger">
+            @if ($errors->any())
+                <h4>Error</h4>
+                <ul class="ps-5">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            @endif
+            </div>
+        
             <form action="/register" method="POST">
                 @csrf
                 <div class="login">
@@ -37,18 +48,11 @@
                     <input type="password" id="email" name="password_confirmation" placeholder="Confirm your password">
                 </div>
                 <button type="submit" class="login-button">
-                    <label>register</label>
+                    <label>Register</label>
                     <img src="/assets/login/Arrow Right.svg" alt="" srcset="">
                 </button>
             </form>
-            @if ($errors->any())
-                <h4>Error</h4>
-                <ul class="ps-5">
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            @endif
+            
             <div class="dont-have-account">
                 <label>Already have an account?</label>
                 <a href="/login">Login now!</a>
@@ -112,14 +116,14 @@
             padding: 0.5rem;
         }
 
-        .login-button {
+        .login-button{
             display: flex;
             align-items: center;
             justify-content: center;
             background-color: #E50913;
             margin-top: 1rem;
-            border-radius: 5px;
-            padding: 0.5rem 0;
+            border-radius: 10px;
+            padding: 1rem 19rem;
             text-decoration: none;
         }
 

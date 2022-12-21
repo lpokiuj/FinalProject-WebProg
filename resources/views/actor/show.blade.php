@@ -4,14 +4,25 @@
 
 @section('content')
     <div class="container" style="padding: 2rem 0;">
-        <div class="row">
+        @guest
+        @else
+            @if(auth()->user()->isAdmin)
+            <div class="row">
             <a href="/actors/{{$actor->id}}/edit" class="text-white d-flex justify-content-center py-2" style="background-color: red; margin-bottom: 0.5rem; border-style: none; border-radius: 5px; text-decoration: none; cursor: pointer;">Edit</a>
             <form class="d-flex justify-content-center flex-column py-2" action="/actors/{{$actor->id}}" method="POST" enctype="multipart/form-data" style="background-color: red; margin-bottom: 1rem; border-style: none; border-radius: 5px; text-decoration: none; ">
                 @method('DELETE')
                 @csrf
                 <button class="text-white" type="submit">Remove</button>
             </form>
-        </div>
+            </div>
+            <div class="text-danger">
+                @if(session()->has('error'))
+                    <p>{{ session()->get('error') }}</p>
+                @endif
+            </div>
+            @else
+            @endif
+        @endguest
         <div class="row flex-wrap">
             <div class="col-md-4">
                 <img src="{{url('storage/'.$actor->image)}}" style="height: 30rem;" alt="">
@@ -46,9 +57,7 @@
             </div>
         </div>
 
-        @if(session()->has('error'))
-            <p>{{ session()->get('error') }}</p>
-        @endif
+
 
     </div>
     <style>

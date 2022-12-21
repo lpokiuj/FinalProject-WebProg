@@ -19,7 +19,7 @@ class ActorController extends Controller
     public function index()
     {
         $actors = Actor::all();
-
+        
         return view('actor.index', ['actors' => $actors]);
     }
 
