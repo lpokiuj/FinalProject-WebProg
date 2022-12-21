@@ -29,4 +29,13 @@ class Watchlist extends Model
 
         return $query;
     }
+
+    public function scopeWithSearch(Builder $query, $search)
+    {
+        if(!is_null($search)){
+            return $query->where('title', 'LIKE', '%'.$search.'%');
+        }
+
+        return $query;
+    }
 }
