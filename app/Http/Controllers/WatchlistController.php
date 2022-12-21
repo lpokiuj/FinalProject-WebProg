@@ -79,6 +79,11 @@ class WatchlistController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if($request->status == 'Remove'){
+            $watchlist = Watchlist::where('userID', Auth::id())->where('movieID', $id)->first();
+            Watchlist::destroy($watchlist->id);
+            return redirect('/watchlists');
+        }
         $watchlist = Watchlist::where('userID', Auth::id())->where('movieID', $id)->first();
         $data = $request->all();
 
