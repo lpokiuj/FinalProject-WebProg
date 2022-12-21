@@ -16,10 +16,11 @@ class ActorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $actors = Actor::all();
-        
+        $searchQuery = $request->query('search', '');
+        $actors = Actor::all()->withSearch($searchQuery)->paginate(5)->withQueryString();
+
         return view('actor.index', ['actors' => $actors]);
     }
 
