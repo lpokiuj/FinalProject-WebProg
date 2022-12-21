@@ -41,6 +41,9 @@ Route::resource('/movies', MovieController::class)->only([
 Route::get('/', function () {
     return redirect('/movies');
 });
+Route::get('/home', function () {
+    return redirect('/movies');
+});
 
 Route::get('/login', function(){
     return view('login');
