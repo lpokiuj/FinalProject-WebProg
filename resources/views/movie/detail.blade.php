@@ -86,7 +86,7 @@
         @foreach($moreMovies as $movie)
         <div  class="card p-2 m-2" style="width: 15rem; text-decoration:none;cursor: pointer; background-color: #121117;">
                     <a href="/movies/{{$movie->id}}" style="height: 20rem;">
-                        <img src="{{url('storage/'.$movie->thumbnail)}}" style="object-fit: cover; height: 19.5rem;" alt="">
+                        <img src="{{url('storage/'.$movie->thumbnail)}}" style="object-fit: cover; height: 19.5rem; width: 14rem;" alt="">
                     </a>
                     <div class="card-body p-0">
                         <div class="text-white" style="margin: 0.5rem 0 0.3rem 0;">{{$movie->title}}</div>
@@ -108,9 +108,14 @@
                                     @endif
                                 @endforeach
                                 @if($flag == 1)
-                                    <div>
-                                        <img src="/assets/check-mark.svg" alt="" style="filter: invert(10%) sepia(80%) saturate(5737%) hue-rotate(8deg) brightness(93%) contrast(119%);">
-                                    </div>
+                                    <form action="/watchlists/{{$movie->id}}" method="POST" enctype="multipart/form-data">
+                                        @method('DELETE')
+                                        @csrf
+                                        <input type="hidden" name="movieID" value="{{$movie->id}}">
+                                        <button type="submit" style="border: none; background-color: #121117;">
+                                            <img src="/assets/check-mark.svg" alt="" style="filter: invert(10%) sepia(80%) saturate(5737%) hue-rotate(8deg) brightness(93%) contrast(119%);">
+                                        </button>
+                                     </form>
                                     @else
                                     <form action="/watchlists" method="POST" enctype="multipart/form-data">
                                         @csrf
