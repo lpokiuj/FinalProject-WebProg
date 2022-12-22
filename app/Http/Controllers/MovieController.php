@@ -33,7 +33,7 @@ class MovieController extends Controller
             'genres',
             'actors'
         ])->withGenre($genreQuery)->withSort($sortQuery)->withSearch($searchQuery)->paginate(5)->withQueryString();
-        
+
         return view('movie.index', [
             'movies' => $movies,
             'queriedMovies' => $queriedMovies,
@@ -122,9 +122,7 @@ class MovieController extends Controller
             'actors'
         ]);
 
-        // dd($movie);
-
-        $moreMovies = Movie::paginate(5);
+        $moreMovies = Movie::where('id', '!=', $movie->id)->paginate(5);
 
         return view('movie.detail', [
             'movie' => $movie,
