@@ -193,7 +193,7 @@
             @foreach($movies->slice(0,5)->all() as $movie)
                 <div  class="card p-2 m-2" style="width: 15rem; text-decoration:none;cursor: pointer; background-color: #121117;">
                     <a href="/movies/{{$movie->id}}" style="height: 20rem;">
-                        <img src="{{url('storage/'.$movie->thumbnail)}}" style="object-fit: cover; height: 19.5rem;" alt="">
+                        <img src="{{url('storage/'.$movie->thumbnail)}}" style="object-fit: cover; height: 19.5rem; width: 14rem;" alt="">
                     </a>
                     <div class="card-body p-0">
                         <div class="text-white" style="margin: 0.5rem 0 0.3rem 0;">{{$movie->title}}</div>
@@ -290,13 +290,12 @@
             @foreach($queriedMovies as $movie)
             <div  class="card p-2 m-2" style="width: 15rem; text-decoration:none;cursor: pointer; background-color: #121117;">
                     <a href="/movies/{{$movie->id}}" style="height: 20rem;">
-                        <img src="{{url('storage/'.$movie->thumbnail)}}" style="object-fit: cover; height: 19.5rem;" alt="">
+                        <img src="{{url('storage/'.$movie->thumbnail)}}" style="object-fit: cover; height: 19.5rem; width: 14rem;" alt="">
                     </a>
                     <div class="card-body p-0">
                         <div class="text-white" style="margin: 0.5rem 0 0.3rem 0;">{{$movie->title}}</div>
                         <div class="d-flex justify-content-between justify-content-center">
                             <div class="" style="margin: 0rem 0 0.3rem 0; color: #4A4B50;">{{ date('Y', strtotime($movie->releaseDate))}}</div>
-                            <!-- UNDER CONSTRUCTION -->
                             @guest
                             @else
                                 @if(auth()->user()->isAdmin)
@@ -331,7 +330,6 @@
                                 @endif
                                 @endif
                             @endguest
-                            <!--END UNDER CONSTRUCTION -->
                         </div>
                     </div>
                 </div>

@@ -38,7 +38,7 @@ class MovieGenresSeeder extends Seeder
             ],
             [
                 'movieID' => 5,
-                'genreID' => 7,
+                'genreID' => 2,
             ],
             [
                 'movieID' => 3,
@@ -46,15 +46,23 @@ class MovieGenresSeeder extends Seeder
             ],
             [
                 'movieID' => 4,
-                'genreID' => 5,
+                'genreID' => 7,
             ],
             [
                 'movieID' => 5,
-                'genreID' => 7,
+                'genreID' => 3,
             ],
             [
                 'movieID' => 6,
                 'genreID' => 1,
+            ],
+            [
+                'movieID' => 6,
+                'genreID' => 8,
+            ],
+            [
+                'movieID' => 6,
+                'genreID' => 9,
             ],
             [
                 'movieID' => 2,
