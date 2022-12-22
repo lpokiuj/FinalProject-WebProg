@@ -118,7 +118,7 @@
                         <select class="form-select" name="actorID[]" id="actorName">
                             <option selected="selected" value="">--Please Select Actor--</option>
                             @foreach($actors as $actor)
-                                <option value="{{$genre->id}}">{{$actor->name}}</option>
+                                <option value="{{$actor->id}}">{{$actor->name}}</option>
                             @endforeach
                         </select>
                     </div>
