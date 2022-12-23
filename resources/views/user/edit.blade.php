@@ -112,6 +112,7 @@
                         </div>
                         <div class="modal-body">
                             <input form="updateProfile" value="{{$user->image}}" placeholder="{{$user->image}}" type="text" name="image" style="width: 29rem;">
+                            <div style="font-size: smaller; color: #4A4B50;">Please upload your image to other sources first and Use the URL</div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

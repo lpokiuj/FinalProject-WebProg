@@ -89,7 +89,7 @@ class WatchlistController extends Controller
         $data = $request->all();
 
         $watchlist->update($data);
-        return redirect('/movies');
+        return redirect('/watchlists');
     }
 
     /**

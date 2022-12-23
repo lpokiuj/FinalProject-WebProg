@@ -104,6 +104,27 @@
         $i++
     @endphp
     @endforeach
+    <div class="row mt-5">
+            <div class="d-flex justify-content-center">
+                {{ $watchlists->links()}}
+            </div>
+        </div>
 </div>
 <!-- END UNDER CONSTRUCTION -->
+<style>
+    .pagination li a {
+        background-color: #1F1F1F;
+        color: white;
+    }
+
+    .pagination{
+        --bs-pagination-active-bg: red;
+        --bs-pagination-active-border-color: red;
+    }
+
+    .page-item:active .page-link{
+        background-color: red;
+        color: white;
+    }    
+</style>
 @endsection

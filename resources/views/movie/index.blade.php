@@ -44,7 +44,7 @@
                                                 @method('DELETE')
                                                 @csrf
                                                 <input type="hidden" name="movieID" value="{{$movies[0]->id}}">
-                                                <button type="submit" style="border: none; background-color: #121117;">
+                                                <button type="submit" style="border: none; background-color: transparent">
                                                     <div class="col-md-1 d-flex justify-content-center align-items-center mt-2" style="background-color: red; height: 2rem; width: 10rem; filter: brightness(50%);">
                                                         <div>Aready Added</div>
                                                     </div>
@@ -100,7 +100,7 @@
                                                 @method('DELETE')
                                                 @csrf
                                                 <input type="hidden" name="movieID" value="{{$movies[1]->id}}">
-                                                <button type="submit" style="border: none; background-color: #121117;">
+                                                <button type="submit" style="border: none; background-color: transparent;">
                                                     <div class="col-md-1 d-flex justify-content-center align-items-center mt-2" style="background-color: red; height: 2rem; width: 10rem; filter: brightness(50%);">
                                                         <div>Aready Added</div>
                                                     </div>
@@ -156,7 +156,7 @@
                                                 @method('DELETE')
                                                 @csrf
                                                 <input type="hidden" name="movieID" value="{{$movies[2]->id}}">
-                                                <button type="submit" style="border: none; background-color: #121117;">
+                                                <button type="submit" style="border: none; background-color: transparent;">
                                                     <div class="col-md-1 d-flex justify-content-center align-items-center mt-2" style="background-color: red; height: 2rem; width: 10rem; filter: brightness(50%);">
                                                         <div>Aready Added</div>
                                                     </div>

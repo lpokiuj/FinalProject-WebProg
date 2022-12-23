@@ -19,7 +19,7 @@ class UserController extends Controller
         ]);
 
         $data = $request->except('password_confirmation');
-        $data['image'] = '/images/user/Default.png';
+        $data['image'] = 'https://t4.ftcdn.net/jpg/03/46/93/61/360_F_346936114_RaxE6OQogebgAWTalE1myseY1Hbb5qPM.jpg';
         $data['password'] = bcrypt($data['password']);
         User::create($data);
         return redirect('/login');
