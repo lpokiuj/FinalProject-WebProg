@@ -190,7 +190,7 @@
                 <img style="filter: invert(100%) sepia(98%) saturate(0%) hue-rotate(350deg) brightness(102%) contrast(103%); height: 2rem;" class="me-2" src="/assets/home/popular.svg" alt="">
                 <h3 class="text-white">Popular</h3>
             </div>
-            @foreach($movies->slice(0,5)->all() as $movie)
+            @foreach($sortedMovies->slice(0,5)->all() as $movie)
                 <div  class="card p-2 m-2" style="width: 15rem; text-decoration:none;cursor: pointer; background-color: #121117;">
                     <a href="/movies/{{$movie->id}}" style="height: 20rem;">
                         <img src="{{url('storage/'.$movie->thumbnail)}}" style="object-fit: cover; height: 19.5rem; width: 14rem;" alt="">
