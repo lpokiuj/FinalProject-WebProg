@@ -86,7 +86,7 @@
             <label for="image">Thumbnail URL</label>
             <input type="file" name="thumbnail" id="" value="{{$movie->thumbnail}}">
             <label for="background">Background URL</label>
-            <input type="file" name="background" id="" value="">
+            <input type="file" name="background" id="" value="{{$movie->background}}">
 
             <button class="text-white" style="margin-top: 0.5rem; background-color: red; border: none; border-radius: 5px; padding: 0.5rem; margin-bottom: 2rem;" type="submit">Edit</button>
         </form>
@@ -104,11 +104,16 @@
         margin: 0.3rem 0;
         color: white;
     }
+    
 
     .btn {
         background-color: red;
         border: none;
         border-style: none;
+    }
+
+    .profile{
+        background-color: transparent;
     }
 
     .btn:hover,
