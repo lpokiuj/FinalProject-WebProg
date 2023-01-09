@@ -29,6 +29,13 @@ class MovieController extends Controller
             'actors'
         ])->get();
 
+        foreach($movies as $movie){
+            $movie['watchlistCount'] = DB::table('watchlists')->where('movieID', $movie->id)->count();
+        }
+        $sortedMovies = collect($movies);
+
+        $sortedMovies = $sortedMovies->sortByDesc('watchlistCount')->values();
+
         $queriedMovies = Movie::with([
             'genres',
             'actors'
@@ -37,6 +44,7 @@ class MovieController extends Controller
         return view('movie.index', [
             'movies' => $movies,
             'queriedMovies' => $queriedMovies,
+            'sortedMovies' => $sortedMovies
         ]);
     }
 
